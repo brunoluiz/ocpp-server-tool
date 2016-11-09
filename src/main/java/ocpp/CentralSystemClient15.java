@@ -31,7 +31,7 @@ public class CentralSystemClient15 implements ChargePointService {
 			BindingProvider bp = (BindingProvider)chargePointService;
 			bp.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, centralSystemServerEndpoint);
 
-			LOGGER.info("Central System OCPP client has connected!");			
+			LOGGER.info("Central System OCPP client has connected!");
 		} catch (Exception e) {
 			LOGGER.error("Could not connect Central System OCPP Client!");
 			e.printStackTrace();

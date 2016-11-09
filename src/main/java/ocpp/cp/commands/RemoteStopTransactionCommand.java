@@ -1,8 +1,6 @@
 package ocpp.cp.commands;
 
 import ocpp.cp.ChargePointCommand;
-import ocpp.cp._2012._06.RemoteStartTransactionRequest;
-import ocpp.cp._2012._06.RemoteStartTransactionResponse;
 import ocpp.cp._2012._06.RemoteStopTransactionRequest;
 import ocpp.cp._2012._06.RemoteStopTransactionResponse;
 

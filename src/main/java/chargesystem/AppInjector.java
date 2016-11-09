@@ -1,6 +1,6 @@
 package chargesystem;
 
-import ocpp.cp.CommandsDispatcher;
+import ocpp.CommandsDispatcher;
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
 import com.google.inject.name.Names;
@@ -33,11 +33,14 @@ public class AppInjector extends AbstractModule {
     }
 
     protected void configureOcppBindings() {
-        // Server bindings
         bind(ChargePointService.class)
                 .annotatedWith(Names.named("CentralSystemClient"))
                 .to(CentralSystemClient15.class)
                 .asEagerSingleton();
+        bind(Object.class)
+                .annotatedWith(Names.named("ClientService"))
+                .to(CentralSystemClient15.class);
+
         bind(CentralSystemService.class)
                 .to(CentralSystemServer15.class)
                 .asEagerSingleton();

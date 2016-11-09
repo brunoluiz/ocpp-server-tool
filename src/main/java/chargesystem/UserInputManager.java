@@ -1,7 +1,7 @@
 package chargesystem;
 
 import com.google.inject.Inject;
-import ocpp.cp.CommandsDispatcher;
+import ocpp.CommandsDispatcher;
 import ocpp.cp.commands.RemoteStartTransactionCommand;
 import ocpp.cp.commands.RemoteStopTransactionCommand;
 import org.slf4j.Logger;

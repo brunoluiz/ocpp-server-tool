@@ -1,8 +1,7 @@
-package ocpp.cp;
+package ocpp;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import ocpp.cp._2012._06.ChargePointService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,19 +12,19 @@ import java.util.Iterator;
  * Created by bds on 09/11/2016.
  */
 public class CommandsDispatcher implements Runnable {
-    protected ArrayList<ChargePointCommand> queue = new ArrayList<ChargePointCommand>();
+    protected ArrayList<OcppCommand> queue = new ArrayList<OcppCommand>();
     private Thread thread = null;
     private static final Logger LOGGER = LoggerFactory.getLogger(CommandsDispatcher.class);
 
     @Inject
-    @Named("ChargePointClient")
-    ChargePointService client = null;
+    @Named("ClientService")
+    Object client = null;
 
     @Inject
     @Named("OcppPoolingPeriod")
     private final Integer POOLING_PERIOD = 500;
 
-    public void queue(ChargePointCommand command) {
+    public void queue(OcppCommand command) {
         command.setClient(client);
         queue.add(command);
     }
@@ -50,8 +49,8 @@ public class CommandsDispatcher implements Runnable {
     }
 
     private void process() {
-        for (Iterator<ChargePointCommand> it = queue.iterator(); it.hasNext(); ) {
-            ChargePointCommand command = it.next();
+        for (Iterator<OcppCommand> it = queue.iterator(); it.hasNext(); ) {
+            OcppCommand command = it.next();
             try {
                 command.execute();
                 it.remove();
