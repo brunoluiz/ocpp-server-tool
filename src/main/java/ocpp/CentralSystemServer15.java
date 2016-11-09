@@ -37,7 +37,7 @@ public class CentralSystemServer15 implements CentralSystemService {
 	}
 	
 	private void start() {
-		LOGGER.info("Starting central system OCPP server @ " + centralSystemServerEndpoint);
+		LOGGER.info("Starting central system OCPP server @ {}", centralSystemServerEndpoint);
 		endpoint = Endpoint.publish(centralSystemServerEndpoint, this);
 		
 		if (!endpoint.isPublished()) {
