@@ -10,10 +10,10 @@ import ocpp.cp._2012._06.ChargePointService;
 import ocpp.cs._2012._06.CentralSystemService;
 
 public class AppInjector extends AbstractModule {
-    public static String CHARGEPOINT_SERVER_ENDPOINT    = "http://192.168.7.2";
+    public static String CHARGEPOINT_SERVER_ENDPOINT    = "http://192.168.7.2:9000";
     public static String CHARGEPOINT_SERVER_PATH        = "/ocpp/ChargePoint";
 
-    public static String CENTRALSYSTEM_SERVER_ENDPOINT  = "http://192.168.7.1:9000";
+    public static String CENTRALSYSTEM_SERVER_ENDPOINT  = "http://192.168.7.1:9001";
     public static String CENTRALSYSTEM_SERVER_PATH      = "/ocpp/CentralSystem";
 
     public static Integer OCPP_POOLING_PERIOD           = 500;

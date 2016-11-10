@@ -14,6 +14,7 @@ import java.util.Iterator;
 public class CommandsDispatcher implements Runnable {
     protected ArrayList<OcppCommand> queue = new ArrayList<OcppCommand>();
     private Thread thread = null;
+    private Integer retries = 0;
     private static final Logger LOGGER = LoggerFactory.getLogger(CommandsDispatcher.class);
 
     @Inject
@@ -48,15 +49,24 @@ public class CommandsDispatcher implements Runnable {
         }
     }
 
+    public void setRetries(int retries) {
+        this.retries = retries;
+    }
+
     private void process() {
         for (Iterator<OcppCommand> it = queue.iterator(); it.hasNext(); ) {
             OcppCommand command = it.next();
-            try {
-                command.execute();
-                it.remove();
-            } catch (Exception e) {
-                e.printStackTrace();
+
+            for(int totalRetries = 0; totalRetries < (this.retries+1); totalRetries++) {
+                try {
+                    command.execute();
+                    break;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+
+            it.remove();
         }
     }
 }
