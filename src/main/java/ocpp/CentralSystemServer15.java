@@ -16,11 +16,12 @@ import com.google.inject.name.Named;
 
 import ocpp.cs._2012._06.*;
 import org.slf4j.LoggerFactory;
+import utils.DateUtil;
 
 @WebService(endpointInterface="ocpp.cs._2012._06.CentralSystemService")
 @BindingType(value = "http://www.w3.org/2003/05/soap/bindings/HTTP/" )
 @SOAPBinding(style = Style.DOCUMENT, use = Use.LITERAL)
-@Addressing(enabled=true, required=false)
+@Addressing(enabled=true, required=true)
 public class CentralSystemServer15 implements CentralSystemService {
 
 	protected String centralSystemServerEndpoint = "";
@@ -51,8 +52,13 @@ public class CentralSystemServer15 implements CentralSystemService {
 		return (int) (System.currentTimeMillis() / 1000L);
 	}
 
+	private void logReceivedRequest(Object request) {
+		LOGGER.info("Received "+request.getClass().getName());
+	}
 
 	public AuthorizeResponse authorize(AuthorizeRequest parameters) {
+		logReceivedRequest(parameters);
+
 		IdTagInfo tagInfo = new IdTagInfo();
 		String userTag = parameters.getIdTag();
 		if(userTag.equals("blockedtag"))
@@ -68,11 +74,11 @@ public class CentralSystemServer15 implements CentralSystemService {
 
 
 	public BootNotificationResponse bootNotification(BootNotificationRequest parameters) {
-		LOGGER.info("OCPP: receiving 'bootNotification' request");
+		logReceivedRequest(parameters);
 		
 		BootNotificationResponse response = new BootNotificationResponse();
 		response.setStatus(RegistrationStatus.ACCEPTED);
-//		response.setCurrentTime(Misc.getCurrentDate());
+		response.setCurrentTime(DateUtil.getCurrentDate());
 		response.setHeartbeatInterval(500);
 
 		return response;
@@ -80,38 +86,46 @@ public class CentralSystemServer15 implements CentralSystemService {
 
 
 	public DataTransferResponse dataTransfer(DataTransferRequest parameters) {
-		// TODO Auto-generated method stub
+		logReceivedRequest(parameters);
+
 		return null;
 	}
 
 
 	public DiagnosticsStatusNotificationResponse diagnosticsStatusNotification(
 			DiagnosticsStatusNotificationRequest parameters) {
-		// TODO Auto-generated method stub
+		logReceivedRequest(parameters);
+
 		return null;
 	}
 
 
 	public FirmwareStatusNotificationResponse firmwareStatusNotification(FirmwareStatusNotificationRequest parameters) {
-		// TODO Auto-generated method stub
+		logReceivedRequest(parameters);
+
 		return null;
 	}
 
 
 	public HeartbeatResponse heartbeat(HeartbeatRequest parameters) {
+		logReceivedRequest(parameters);
+
 		HeartbeatResponse response = new HeartbeatResponse();
-//		response.setCurrentTime(Misc.getCurrentDate());
+		response.setCurrentTime(DateUtil.getCurrentDate());
 		return response;
 	}
 
 
 	public MeterValuesResponse meterValues(MeterValuesRequest parameters) {
-		// TODO Auto-generated method stub
+		logReceivedRequest(parameters);
+
 		return null;
 	}
 
 
 	public StartTransactionResponse startTransaction(StartTransactionRequest parameters) {
+		logReceivedRequest(parameters);
+
 		IdTagInfo tagInfo = new IdTagInfo();
 		tagInfo.setStatus(AuthorizationStatus.ACCEPTED);
 
@@ -126,12 +140,16 @@ public class CentralSystemServer15 implements CentralSystemService {
 
 
 	public StatusNotificationResponse statusNotification(StatusNotificationRequest parameters) {
+		logReceivedRequest(parameters);
+
 		StatusNotificationResponse response = new StatusNotificationResponse();
 		return response;
 	}
 
 
 	public StopTransactionResponse stopTransaction(StopTransactionRequest parameters) {
+		logReceivedRequest(parameters);
+
 		Integer transactionId = parameters.getTransactionId();
 		IdTagInfo tagInfo = new IdTagInfo();
 		if(!activeTransactions.contains(transactionId)) {
