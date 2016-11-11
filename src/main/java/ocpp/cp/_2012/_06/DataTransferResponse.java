@@ -4,6 +4,7 @@ package ocpp.cp._2012._06;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -37,6 +38,7 @@ import javax.xml.bind.annotation.XmlType;
 public class DataTransferResponse {
 
     @XmlElement(required = true)
+    @XmlSchemaType(name = "string")
     protected DataTransferStatus status;
     protected String data;
 

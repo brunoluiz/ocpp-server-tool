@@ -143,15 +143,15 @@ public class MeterValue {
 
         @XmlValue
         protected String value;
-        @XmlAttribute
+        @XmlAttribute(name = "context")
         protected ReadingContext context;
-        @XmlAttribute
+        @XmlAttribute(name = "format")
         protected ValueFormat format;
-        @XmlAttribute
+        @XmlAttribute(name = "measurand")
         protected Measurand measurand;
-        @XmlAttribute
+        @XmlAttribute(name = "location")
         protected Location location;
-        @XmlAttribute
+        @XmlAttribute(name = "unit")
         protected UnitOfMeasure unit;
 
         /**

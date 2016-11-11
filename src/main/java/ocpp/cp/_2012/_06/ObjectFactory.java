@@ -64,219 +64,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetLocalListVersionResponse }
-     * 
-     */
-    public GetLocalListVersionResponse createGetLocalListVersionResponse() {
-        return new GetLocalListVersionResponse();
-    }
-
-    /**
-     * Create an instance of {@link ReserveNowResponse }
-     * 
-     */
-    public ReserveNowResponse createReserveNowResponse() {
-        return new ReserveNowResponse();
-    }
-
-    /**
-     * Create an instance of {@link RemoteStopTransactionRequest }
-     * 
-     */
-    public RemoteStopTransactionRequest createRemoteStopTransactionRequest() {
-        return new RemoteStopTransactionRequest();
-    }
-
-    /**
-     * Create an instance of {@link CancelReservationResponse }
-     * 
-     */
-    public CancelReservationResponse createCancelReservationResponse() {
-        return new CancelReservationResponse();
-    }
-
-    /**
-     * Create an instance of {@link DataTransferRequest }
-     * 
-     */
-    public DataTransferRequest createDataTransferRequest() {
-        return new DataTransferRequest();
-    }
-
-    /**
-     * Create an instance of {@link CancelReservationRequest }
-     * 
-     */
-    public CancelReservationRequest createCancelReservationRequest() {
-        return new CancelReservationRequest();
-    }
-
-    /**
      * Create an instance of {@link ChangeAvailabilityResponse }
      * 
      */
     public ChangeAvailabilityResponse createChangeAvailabilityResponse() {
         return new ChangeAvailabilityResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetConfigurationRequest }
-     * 
-     */
-    public GetConfigurationRequest createGetConfigurationRequest() {
-        return new GetConfigurationRequest();
-    }
-
-    /**
-     * Create an instance of {@link UnlockConnectorResponse }
-     * 
-     */
-    public UnlockConnectorResponse createUnlockConnectorResponse() {
-        return new UnlockConnectorResponse();
-    }
-
-    /**
-     * Create an instance of {@link KeyValue }
-     * 
-     */
-    public KeyValue createKeyValue() {
-        return new KeyValue();
-    }
-
-    /**
-     * Create an instance of {@link SendLocalListRequest }
-     * 
-     */
-    public SendLocalListRequest createSendLocalListRequest() {
-        return new SendLocalListRequest();
-    }
-
-    /**
-     * Create an instance of {@link ChangeConfigurationResponse }
-     * 
-     */
-    public ChangeConfigurationResponse createChangeConfigurationResponse() {
-        return new ChangeConfigurationResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetConfigurationResponse }
-     * 
-     */
-    public GetConfigurationResponse createGetConfigurationResponse() {
-        return new GetConfigurationResponse();
-    }
-
-    /**
-     * Create an instance of {@link ChangeConfigurationRequest }
-     * 
-     */
-    public ChangeConfigurationRequest createChangeConfigurationRequest() {
-        return new ChangeConfigurationRequest();
-    }
-
-    /**
-     * Create an instance of {@link GetLocalListVersionRequest }
-     * 
-     */
-    public GetLocalListVersionRequest createGetLocalListVersionRequest() {
-        return new GetLocalListVersionRequest();
-    }
-
-    /**
-     * Create an instance of {@link ClearCacheResponse }
-     * 
-     */
-    public ClearCacheResponse createClearCacheResponse() {
-        return new ClearCacheResponse();
-    }
-
-    /**
-     * Create an instance of {@link ResetResponse }
-     * 
-     */
-    public ResetResponse createResetResponse() {
-        return new ResetResponse();
-    }
-
-    /**
-     * Create an instance of {@link UpdateFirmwareRequest }
-     * 
-     */
-    public UpdateFirmwareRequest createUpdateFirmwareRequest() {
-        return new UpdateFirmwareRequest();
-    }
-
-    /**
-     * Create an instance of {@link SendLocalListResponse }
-     * 
-     */
-    public SendLocalListResponse createSendLocalListResponse() {
-        return new SendLocalListResponse();
-    }
-
-    /**
-     * Create an instance of {@link UnlockConnectorRequest }
-     * 
-     */
-    public UnlockConnectorRequest createUnlockConnectorRequest() {
-        return new UnlockConnectorRequest();
-    }
-
-    /**
-     * Create an instance of {@link GetDiagnosticsRequest }
-     * 
-     */
-    public GetDiagnosticsRequest createGetDiagnosticsRequest() {
-        return new GetDiagnosticsRequest();
-    }
-
-    /**
-     * Create an instance of {@link UpdateFirmwareResponse }
-     * 
-     */
-    public UpdateFirmwareResponse createUpdateFirmwareResponse() {
-        return new UpdateFirmwareResponse();
-    }
-
-    /**
-     * Create an instance of {@link ReserveNowRequest }
-     * 
-     */
-    public ReserveNowRequest createReserveNowRequest() {
-        return new ReserveNowRequest();
-    }
-
-    /**
-     * Create an instance of {@link GetDiagnosticsResponse }
-     * 
-     */
-    public GetDiagnosticsResponse createGetDiagnosticsResponse() {
-        return new GetDiagnosticsResponse();
-    }
-
-    /**
-     * Create an instance of {@link ChangeAvailabilityRequest }
-     * 
-     */
-    public ChangeAvailabilityRequest createChangeAvailabilityRequest() {
-        return new ChangeAvailabilityRequest();
-    }
-
-    /**
-     * Create an instance of {@link IdTagInfo }
-     * 
-     */
-    public IdTagInfo createIdTagInfo() {
-        return new IdTagInfo();
-    }
-
-    /**
-     * Create an instance of {@link RemoteStartTransactionRequest }
-     * 
-     */
-    public RemoteStartTransactionRequest createRemoteStartTransactionRequest() {
-        return new RemoteStartTransactionRequest();
     }
 
     /**
@@ -288,11 +80,43 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link RemoteStartTransactionResponse }
+     * Create an instance of {@link DataTransferRequest }
      * 
      */
-    public RemoteStartTransactionResponse createRemoteStartTransactionResponse() {
-        return new RemoteStartTransactionResponse();
+    public DataTransferRequest createDataTransferRequest() {
+        return new DataTransferRequest();
+    }
+
+    /**
+     * Create an instance of {@link ResetResponse }
+     * 
+     */
+    public ResetResponse createResetResponse() {
+        return new ResetResponse();
+    }
+
+    /**
+     * Create an instance of {@link CancelReservationResponse }
+     * 
+     */
+    public CancelReservationResponse createCancelReservationResponse() {
+        return new CancelReservationResponse();
+    }
+
+    /**
+     * Create an instance of {@link ReserveNowRequest }
+     * 
+     */
+    public ReserveNowRequest createReserveNowRequest() {
+        return new ReserveNowRequest();
+    }
+
+    /**
+     * Create an instance of {@link ChangeConfigurationResponse }
+     * 
+     */
+    public ChangeConfigurationResponse createChangeConfigurationResponse() {
+        return new ChangeConfigurationResponse();
     }
 
     /**
@@ -304,11 +128,187 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SendLocalListResponse }
+     * 
+     */
+    public SendLocalListResponse createSendLocalListResponse() {
+        return new SendLocalListResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetDiagnosticsRequest }
+     * 
+     */
+    public GetDiagnosticsRequest createGetDiagnosticsRequest() {
+        return new GetDiagnosticsRequest();
+    }
+
+    /**
+     * Create an instance of {@link GetConfigurationRequest }
+     * 
+     */
+    public GetConfigurationRequest createGetConfigurationRequest() {
+        return new GetConfigurationRequest();
+    }
+
+    /**
+     * Create an instance of {@link UpdateFirmwareResponse }
+     * 
+     */
+    public UpdateFirmwareResponse createUpdateFirmwareResponse() {
+        return new UpdateFirmwareResponse();
+    }
+
+    /**
+     * Create an instance of {@link SendLocalListRequest }
+     * 
+     */
+    public SendLocalListRequest createSendLocalListRequest() {
+        return new SendLocalListRequest();
+    }
+
+    /**
+     * Create an instance of {@link RemoteStartTransactionResponse }
+     * 
+     */
+    public RemoteStartTransactionResponse createRemoteStartTransactionResponse() {
+        return new RemoteStartTransactionResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetConfigurationResponse }
+     * 
+     */
+    public GetConfigurationResponse createGetConfigurationResponse() {
+        return new GetConfigurationResponse();
+    }
+
+    /**
+     * Create an instance of {@link RemoteStartTransactionRequest }
+     * 
+     */
+    public RemoteStartTransactionRequest createRemoteStartTransactionRequest() {
+        return new RemoteStartTransactionRequest();
+    }
+
+    /**
+     * Create an instance of {@link ChangeConfigurationRequest }
+     * 
+     */
+    public ChangeConfigurationRequest createChangeConfigurationRequest() {
+        return new ChangeConfigurationRequest();
+    }
+
+    /**
+     * Create an instance of {@link ReserveNowResponse }
+     * 
+     */
+    public ReserveNowResponse createReserveNowResponse() {
+        return new ReserveNowResponse();
+    }
+
+    /**
      * Create an instance of {@link ResetRequest }
      * 
      */
     public ResetRequest createResetRequest() {
         return new ResetRequest();
+    }
+
+    /**
+     * Create an instance of {@link GetDiagnosticsResponse }
+     * 
+     */
+    public GetDiagnosticsResponse createGetDiagnosticsResponse() {
+        return new GetDiagnosticsResponse();
+    }
+
+    /**
+     * Create an instance of {@link RemoteStopTransactionRequest }
+     * 
+     */
+    public RemoteStopTransactionRequest createRemoteStopTransactionRequest() {
+        return new RemoteStopTransactionRequest();
+    }
+
+    /**
+     * Create an instance of {@link UnlockConnectorResponse }
+     * 
+     */
+    public UnlockConnectorResponse createUnlockConnectorResponse() {
+        return new UnlockConnectorResponse();
+    }
+
+    /**
+     * Create an instance of {@link ClearCacheResponse }
+     * 
+     */
+    public ClearCacheResponse createClearCacheResponse() {
+        return new ClearCacheResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetLocalListVersionResponse }
+     * 
+     */
+    public GetLocalListVersionResponse createGetLocalListVersionResponse() {
+        return new GetLocalListVersionResponse();
+    }
+
+    /**
+     * Create an instance of {@link UpdateFirmwareRequest }
+     * 
+     */
+    public UpdateFirmwareRequest createUpdateFirmwareRequest() {
+        return new UpdateFirmwareRequest();
+    }
+
+    /**
+     * Create an instance of {@link GetLocalListVersionRequest }
+     * 
+     */
+    public GetLocalListVersionRequest createGetLocalListVersionRequest() {
+        return new GetLocalListVersionRequest();
+    }
+
+    /**
+     * Create an instance of {@link UnlockConnectorRequest }
+     * 
+     */
+    public UnlockConnectorRequest createUnlockConnectorRequest() {
+        return new UnlockConnectorRequest();
+    }
+
+    /**
+     * Create an instance of {@link CancelReservationRequest }
+     * 
+     */
+    public CancelReservationRequest createCancelReservationRequest() {
+        return new CancelReservationRequest();
+    }
+
+    /**
+     * Create an instance of {@link ChangeAvailabilityRequest }
+     * 
+     */
+    public ChangeAvailabilityRequest createChangeAvailabilityRequest() {
+        return new ChangeAvailabilityRequest();
+    }
+
+    /**
+     * Create an instance of {@link ClearCacheRequest }
+     * 
+     */
+    public ClearCacheRequest createClearCacheRequest() {
+        return new ClearCacheRequest();
+    }
+
+    /**
+     * Create an instance of {@link KeyValue }
+     * 
+     */
+    public KeyValue createKeyValue() {
+        return new KeyValue();
     }
 
     /**
@@ -320,11 +320,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ClearCacheRequest }
+     * Create an instance of {@link IdTagInfo }
      * 
      */
-    public ClearCacheRequest createClearCacheRequest() {
-        return new ClearCacheRequest();
+    public IdTagInfo createIdTagInfo() {
+        return new IdTagInfo();
     }
 
     /**

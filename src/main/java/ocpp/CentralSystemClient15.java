@@ -1,5 +1,6 @@
 package ocpp;
 
+import javax.xml.namespace.QName;
 import javax.xml.ws.BindingProvider;
 
 import com.google.inject.Inject;
@@ -12,7 +13,7 @@ import java.net.URL;
 
 public class CentralSystemClient15 implements ChargePointService {
 	
-	private static String CHARGE_POINT_WSDL_LOCATION = "../../wsdl/ocpp_chargepointservice_1.5_final.wsdl"; // FIXME
+	private static String CHARGE_POINT_WSDL_LOCATION = "wsdl/ocpp_chargepointservice_1.5_final.wsdl"; // FIXME
 	private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(CentralSystemClient15.class);
 
 	private String centralSystemServerEndpoint = "";
@@ -28,7 +29,6 @@ public class CentralSystemClient15 implements ChargePointService {
 	private void setup() {
 		try {
 			URL url = CentralSystemClient15.class.getClassLoader().getResource(CHARGE_POINT_WSDL_LOCATION);
-
 			chargePointService = new ChargePointService_Service(url).getChargePointServiceSoap12();
 			
 			BindingProvider bp = (BindingProvider)chargePointService;
@@ -45,97 +45,97 @@ public class CentralSystemClient15 implements ChargePointService {
 		LOGGER.info("Sending "+request.getClass().getName());
 	}
 
-	public UnlockConnectorResponse unlockConnector(UnlockConnectorRequest parameters) {
+	public UnlockConnectorResponse unlockConnector(UnlockConnectorRequest parameters, String chargeBoxId) {
 		logSendRequest(parameters);
 		return null;
 	}
 
 
-	public ResetResponse reset(ResetRequest parameters) {
+	public ResetResponse reset(ResetRequest parameters, String chargeBoxId) {
 		logSendRequest(parameters);
 		return null;
 	}
 
 
-	public ChangeAvailabilityResponse changeAvailability(ChangeAvailabilityRequest parameters) {
+	public ChangeAvailabilityResponse changeAvailability(ChangeAvailabilityRequest parameters, String chargeBoxId) {
 		logSendRequest(parameters);
 		return null;
 	}
 
 
-	public GetDiagnosticsResponse getDiagnostics(GetDiagnosticsRequest parameters) {
+	public GetDiagnosticsResponse getDiagnostics(GetDiagnosticsRequest parameters, String chargeBoxId) {
 		logSendRequest(parameters);
 		return null;
 	}
 
 
-	public ClearCacheResponse clearCache(ClearCacheRequest parameters) {
+	public ClearCacheResponse clearCache(ClearCacheRequest parameters, String chargeBoxId) {
 		logSendRequest(parameters);
 		return null;
 	}
 
 
-	public UpdateFirmwareResponse updateFirmware(UpdateFirmwareRequest parameters) {
+	public UpdateFirmwareResponse updateFirmware(UpdateFirmwareRequest parameters, String chargeBoxId) {
 		logSendRequest(parameters);
 		return null;
 	}
 
 
-	public ChangeConfigurationResponse changeConfiguration(ChangeConfigurationRequest parameters) {
+	public ChangeConfigurationResponse changeConfiguration(ChangeConfigurationRequest parameters, String chargeBoxId) {
 		logSendRequest(parameters);
 		return null;
 	}
 
 
-	public RemoteStartTransactionResponse remoteStartTransaction(RemoteStartTransactionRequest parameters) {
+	public RemoteStartTransactionResponse remoteStartTransaction(RemoteStartTransactionRequest parameters, String chargeBoxId) {
 		logSendRequest(parameters);
-		RemoteStartTransactionResponse response = chargePointService.remoteStartTransaction(parameters);
-		
+		RemoteStartTransactionResponse response = chargePointService.remoteStartTransaction(parameters, "");
+
 		return response;
 	}
 
 
-	public RemoteStopTransactionResponse remoteStopTransaction(RemoteStopTransactionRequest parameters) {
+	public RemoteStopTransactionResponse remoteStopTransaction(RemoteStopTransactionRequest parameters, String chargeBoxId) {
 		logSendRequest(parameters);
-		RemoteStopTransactionResponse response = chargePointService.remoteStopTransaction(parameters);
-		
+		RemoteStopTransactionResponse response = chargePointService.remoteStopTransaction(parameters, "");
+
 		return response;
 	}
 
 
-	public CancelReservationResponse cancelReservation(CancelReservationRequest parameters) {
+	public CancelReservationResponse cancelReservation(CancelReservationRequest parameters, String chargeBoxId) {
 		logSendRequest(parameters);
 		return null;
 	}
 
 
-	public DataTransferResponse dataTransfer(DataTransferRequest parameters) {
+	public DataTransferResponse dataTransfer(DataTransferRequest parameters, String chargeBoxId) {
 		logSendRequest(parameters);
-		DataTransferResponse response = chargePointService.dataTransfer(parameters);
+		DataTransferResponse response = chargePointService.dataTransfer(parameters, "");
 
 		LOGGER.info("Data transfer:" + response.getStatus().toString() + " - " + response.getData());
 		return response;
 	}
 
 
-	public GetConfigurationResponse getConfiguration(GetConfigurationRequest parameters) {
+	public GetConfigurationResponse getConfiguration(GetConfigurationRequest parameters, String chargeBoxId) {
 		logSendRequest(parameters);
 		return null;
 	}
 
-	public GetLocalListVersionResponse getLocalListVersion(GetLocalListVersionRequest parameters) {
-		logSendRequest(parameters);
-		return null;
-	}
-
-
-	public ReserveNowResponse reserveNow(ReserveNowRequest parameters) {
+	public GetLocalListVersionResponse getLocalListVersion(GetLocalListVersionRequest parameters, String chargeBoxId) {
 		logSendRequest(parameters);
 		return null;
 	}
 
 
-	public SendLocalListResponse sendLocalList(SendLocalListRequest parameters) {
+	public ReserveNowResponse reserveNow(ReserveNowRequest parameters, String chargeBoxId) {
+		logSendRequest(parameters);
+		return null;
+	}
+
+
+	public SendLocalListResponse sendLocalList(SendLocalListRequest parameters, String chargeBoxId) {
 		logSendRequest(parameters);
 		return null;
 	}

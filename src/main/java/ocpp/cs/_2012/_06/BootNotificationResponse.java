@@ -41,6 +41,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 public class BootNotificationResponse {
 
     @XmlElement(required = true)
+    @XmlSchemaType(name = "string")
     protected RegistrationStatus status;
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")

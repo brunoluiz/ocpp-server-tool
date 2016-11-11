@@ -39,6 +39,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 public class IdTagInfo {
 
     @XmlElement(required = true)
+    @XmlSchemaType(name = "string")
     protected AuthorizationStatus status;
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar expiryDate;

@@ -50,8 +50,10 @@ public class StatusNotificationRequest {
 
     protected int connectorId;
     @XmlElement(required = true)
+    @XmlSchemaType(name = "string")
     protected ChargePointStatus status;
     @XmlElement(required = true)
+    @XmlSchemaType(name = "string")
     protected ChargePointErrorCode errorCode;
     protected String info;
     @XmlSchemaType(name = "dateTime")

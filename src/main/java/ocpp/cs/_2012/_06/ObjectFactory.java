@@ -54,123 +54,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link StopTransactionRequest }
-     * 
-     */
-    public StopTransactionRequest createStopTransactionRequest() {
-        return new StopTransactionRequest();
-    }
-
-    /**
-     * Create an instance of {@link DiagnosticsStatusNotificationRequest }
-     * 
-     */
-    public DiagnosticsStatusNotificationRequest createDiagnosticsStatusNotificationRequest() {
-        return new DiagnosticsStatusNotificationRequest();
-    }
-
-    /**
-     * Create an instance of {@link StatusNotificationResponse }
-     * 
-     */
-    public StatusNotificationResponse createStatusNotificationResponse() {
-        return new StatusNotificationResponse();
-    }
-
-    /**
-     * Create an instance of {@link DataTransferRequest }
-     * 
-     */
-    public DataTransferRequest createDataTransferRequest() {
-        return new DataTransferRequest();
-    }
-
-    /**
-     * Create an instance of {@link BootNotificationResponse }
-     * 
-     */
-    public BootNotificationResponse createBootNotificationResponse() {
-        return new BootNotificationResponse();
-    }
-
-    /**
      * Create an instance of {@link MeterValue }
      * 
      */
     public MeterValue createMeterValue() {
         return new MeterValue();
-    }
-
-    /**
-     * Create an instance of {@link AuthorizeResponse }
-     * 
-     */
-    public AuthorizeResponse createAuthorizeResponse() {
-        return new AuthorizeResponse();
-    }
-
-    /**
-     * Create an instance of {@link MeterValue.Value }
-     * 
-     */
-    public MeterValue.Value createMeterValueValue() {
-        return new MeterValue.Value();
-    }
-
-    /**
-     * Create an instance of {@link DiagnosticsStatusNotificationResponse }
-     * 
-     */
-    public DiagnosticsStatusNotificationResponse createDiagnosticsStatusNotificationResponse() {
-        return new DiagnosticsStatusNotificationResponse();
-    }
-
-    /**
-     * Create an instance of {@link BootNotificationRequest }
-     * 
-     */
-    public BootNotificationRequest createBootNotificationRequest() {
-        return new BootNotificationRequest();
-    }
-
-    /**
-     * Create an instance of {@link StartTransactionResponse }
-     * 
-     */
-    public StartTransactionResponse createStartTransactionResponse() {
-        return new StartTransactionResponse();
-    }
-
-    /**
-     * Create an instance of {@link FirmwareStatusNotificationRequest }
-     * 
-     */
-    public FirmwareStatusNotificationRequest createFirmwareStatusNotificationRequest() {
-        return new FirmwareStatusNotificationRequest();
-    }
-
-    /**
-     * Create an instance of {@link IdTagInfo }
-     * 
-     */
-    public IdTagInfo createIdTagInfo() {
-        return new IdTagInfo();
-    }
-
-    /**
-     * Create an instance of {@link HeartbeatRequest }
-     * 
-     */
-    public HeartbeatRequest createHeartbeatRequest() {
-        return new HeartbeatRequest();
-    }
-
-    /**
-     * Create an instance of {@link AuthorizeRequest }
-     * 
-     */
-    public AuthorizeRequest createAuthorizeRequest() {
-        return new AuthorizeRequest();
     }
 
     /**
@@ -182,11 +70,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link TransactionData }
+     * Create an instance of {@link DataTransferResponse }
      * 
      */
-    public TransactionData createTransactionData() {
-        return new TransactionData();
+    public DataTransferResponse createDataTransferResponse() {
+        return new DataTransferResponse();
+    }
+
+    /**
+     * Create an instance of {@link StopTransactionRequest }
+     * 
+     */
+    public StopTransactionRequest createStopTransactionRequest() {
+        return new StopTransactionRequest();
     }
 
     /**
@@ -198,19 +94,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link StartTransactionRequest }
+     * Create an instance of {@link DataTransferRequest }
      * 
      */
-    public StartTransactionRequest createStartTransactionRequest() {
-        return new StartTransactionRequest();
-    }
-
-    /**
-     * Create an instance of {@link MeterValuesRequest }
-     * 
-     */
-    public MeterValuesRequest createMeterValuesRequest() {
-        return new MeterValuesRequest();
+    public DataTransferRequest createDataTransferRequest() {
+        return new DataTransferRequest();
     }
 
     /**
@@ -222,11 +110,43 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link StartTransactionRequest }
+     * 
+     */
+    public StartTransactionRequest createStartTransactionRequest() {
+        return new StartTransactionRequest();
+    }
+
+    /**
+     * Create an instance of {@link StartTransactionResponse }
+     * 
+     */
+    public StartTransactionResponse createStartTransactionResponse() {
+        return new StartTransactionResponse();
+    }
+
+    /**
+     * Create an instance of {@link HeartbeatRequest }
+     * 
+     */
+    public HeartbeatRequest createHeartbeatRequest() {
+        return new HeartbeatRequest();
+    }
+
+    /**
      * Create an instance of {@link StopTransactionResponse }
      * 
      */
     public StopTransactionResponse createStopTransactionResponse() {
         return new StopTransactionResponse();
+    }
+
+    /**
+     * Create an instance of {@link FirmwareStatusNotificationRequest }
+     * 
+     */
+    public FirmwareStatusNotificationRequest createFirmwareStatusNotificationRequest() {
+        return new FirmwareStatusNotificationRequest();
     }
 
     /**
@@ -238,11 +158,91 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DataTransferResponse }
+     * Create an instance of {@link AuthorizeRequest }
      * 
      */
-    public DataTransferResponse createDataTransferResponse() {
-        return new DataTransferResponse();
+    public AuthorizeRequest createAuthorizeRequest() {
+        return new AuthorizeRequest();
+    }
+
+    /**
+     * Create an instance of {@link MeterValuesRequest }
+     * 
+     */
+    public MeterValuesRequest createMeterValuesRequest() {
+        return new MeterValuesRequest();
+    }
+
+    /**
+     * Create an instance of {@link DiagnosticsStatusNotificationRequest }
+     * 
+     */
+    public DiagnosticsStatusNotificationRequest createDiagnosticsStatusNotificationRequest() {
+        return new DiagnosticsStatusNotificationRequest();
+    }
+
+    /**
+     * Create an instance of {@link DiagnosticsStatusNotificationResponse }
+     * 
+     */
+    public DiagnosticsStatusNotificationResponse createDiagnosticsStatusNotificationResponse() {
+        return new DiagnosticsStatusNotificationResponse();
+    }
+
+    /**
+     * Create an instance of {@link AuthorizeResponse }
+     * 
+     */
+    public AuthorizeResponse createAuthorizeResponse() {
+        return new AuthorizeResponse();
+    }
+
+    /**
+     * Create an instance of {@link StatusNotificationResponse }
+     * 
+     */
+    public StatusNotificationResponse createStatusNotificationResponse() {
+        return new StatusNotificationResponse();
+    }
+
+    /**
+     * Create an instance of {@link BootNotificationRequest }
+     * 
+     */
+    public BootNotificationRequest createBootNotificationRequest() {
+        return new BootNotificationRequest();
+    }
+
+    /**
+     * Create an instance of {@link BootNotificationResponse }
+     * 
+     */
+    public BootNotificationResponse createBootNotificationResponse() {
+        return new BootNotificationResponse();
+    }
+
+    /**
+     * Create an instance of {@link TransactionData }
+     * 
+     */
+    public TransactionData createTransactionData() {
+        return new TransactionData();
+    }
+
+    /**
+     * Create an instance of {@link IdTagInfo }
+     * 
+     */
+    public IdTagInfo createIdTagInfo() {
+        return new IdTagInfo();
+    }
+
+    /**
+     * Create an instance of {@link MeterValue.Value }
+     * 
+     */
+    public MeterValue.Value createMeterValueValue() {
+        return new MeterValue.Value();
     }
 
     /**

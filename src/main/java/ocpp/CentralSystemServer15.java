@@ -56,7 +56,7 @@ public class CentralSystemServer15 implements CentralSystemService {
 		LOGGER.info("Received "+request.getClass().getName());
 	}
 
-	public AuthorizeResponse authorize(AuthorizeRequest parameters) {
+	public AuthorizeResponse authorize(AuthorizeRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
 
 		IdTagInfo tagInfo = new IdTagInfo();
@@ -73,7 +73,7 @@ public class CentralSystemServer15 implements CentralSystemService {
 	}
 
 
-	public BootNotificationResponse bootNotification(BootNotificationRequest parameters) {
+	public BootNotificationResponse bootNotification(BootNotificationRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
 		
 		BootNotificationResponse response = new BootNotificationResponse();
@@ -85,7 +85,7 @@ public class CentralSystemServer15 implements CentralSystemService {
 	}
 
 
-	public DataTransferResponse dataTransfer(DataTransferRequest parameters) {
+	public DataTransferResponse dataTransfer(DataTransferRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
 
 		return null;
@@ -93,21 +93,21 @@ public class CentralSystemServer15 implements CentralSystemService {
 
 
 	public DiagnosticsStatusNotificationResponse diagnosticsStatusNotification(
-			DiagnosticsStatusNotificationRequest parameters) {
+			DiagnosticsStatusNotificationRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
 
 		return null;
 	}
 
 
-	public FirmwareStatusNotificationResponse firmwareStatusNotification(FirmwareStatusNotificationRequest parameters) {
+	public FirmwareStatusNotificationResponse firmwareStatusNotification(FirmwareStatusNotificationRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
 
 		return null;
 	}
 
 
-	public HeartbeatResponse heartbeat(HeartbeatRequest parameters) {
+	public HeartbeatResponse heartbeat(HeartbeatRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
 
 		HeartbeatResponse response = new HeartbeatResponse();
@@ -116,14 +116,14 @@ public class CentralSystemServer15 implements CentralSystemService {
 	}
 
 
-	public MeterValuesResponse meterValues(MeterValuesRequest parameters) {
+	public MeterValuesResponse meterValues(MeterValuesRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
 
 		return null;
 	}
 
 
-	public StartTransactionResponse startTransaction(StartTransactionRequest parameters) {
+	public StartTransactionResponse startTransaction(StartTransactionRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
 
 		IdTagInfo tagInfo = new IdTagInfo();
@@ -139,7 +139,7 @@ public class CentralSystemServer15 implements CentralSystemService {
 	}
 
 
-	public StatusNotificationResponse statusNotification(StatusNotificationRequest parameters) {
+	public StatusNotificationResponse statusNotification(StatusNotificationRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
 
 		StatusNotificationResponse response = new StatusNotificationResponse();
@@ -147,7 +147,7 @@ public class CentralSystemServer15 implements CentralSystemService {
 	}
 
 
-	public StopTransactionResponse stopTransaction(StopTransactionRequest parameters) {
+	public StopTransactionResponse stopTransaction(StopTransactionRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
 
 		Integer transactionId = parameters.getTransactionId();
