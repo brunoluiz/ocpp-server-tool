@@ -9,12 +9,15 @@
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
+        <!-- GUICE Dependency Injector -->
         <!-- https://mvnrepository.com/artifact/com.google.inject/guice -->
         <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
             <version>4.0</version>
         </dependency>
+
+        <!-- Metro WSDL Serving (superior and less buggy than the embedded one)-->
         <!-- https://mvnrepository.com/artifact/org.glassfish.metro/metro-project -->
         <dependency>
             <groupId>org.glassfish.metro</groupId>
@@ -22,6 +25,7 @@
             <version>2.3.1</version>
         </dependency>
 
+        <!-- SLF4J Logging tool -->
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -29,7 +33,7 @@
             <version>1.7.21</version>
         </dependency>
 
-        <!-- Log4J Dependencies (Logging framework) -->
+        <!-- Log4J Loggin Framework Dependencies -->
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -48,6 +52,8 @@
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>2.7</version>
         </dependency>
+
+        <!-- Commons CLI (Command Line Interface) -->
         <!-- https://mvnrepository.com/artifact/commons-cli/commons-cli -->
         <dependency>
             <groupId>commons-cli</groupId>
@@ -57,9 +63,16 @@
 
     </dependencies>
 
+    <!-- Setup the JDK version -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+    </properties>
+
     <build>
         <plugins>
-            <!-- usage of jax-ws maven plugin-->
+            <!-- Create the OCPP Java Classes from WSDL files -->
             <plugin>
                 <groupId>org.jvnet.jax-ws-commons</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
@@ -73,12 +86,14 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <!--<executable>${tool.wsimport}</executable>-->
+                    <executable>${tool.wsimport}</executable>
                     <wsdlDirectory>src/main/resources/wsdl</wsdlDirectory>
                     <sourceDestDir>src/main/java</sourceDestDir>
 
                     <wsdlLocation>wsdl/*</wsdlLocation>
-                    <args>-wsdllocation wsdl/*</args>
+                    <args>
+                        <arg>-wsdllocation wsdl/*</arg>
+                    </args>
 
                     <keep>true</keep>
                     <extension>true</extension>
@@ -90,6 +105,27 @@
                         <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
                     </vmArgs>
                     <sei/>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>chargesystem.App</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>

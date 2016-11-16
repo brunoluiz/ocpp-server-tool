@@ -10,7 +10,10 @@
       <sourceFolder url="file://$MODULE_DIR$/target/jaxws/wsimport/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/ocpp/centralsystem" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ocpp/specs" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/target/archive-tmp" />
       <excludeFolder url="file://$MODULE_DIR$/target/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/target/maven-archiver" />
+      <excludeFolder url="file://$MODULE_DIR$/target/maven-status" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
