@@ -9,7 +9,9 @@ import ocpp.cp._2012._06.ChargePointService;
 public abstract class CentralSystemCommand implements OcppCommand {
     protected ChargePointService chargePointService = null;
 
+    protected abstract void parseParameters(String parameters);
     public abstract Object execute() throws Exception;
+
     public void setClient(Object client) {
         chargePointService = (ChargePointService)client;
     }

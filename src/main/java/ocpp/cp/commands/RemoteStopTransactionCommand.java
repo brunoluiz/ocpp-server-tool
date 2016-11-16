@@ -13,7 +13,10 @@ public class RemoteStopTransactionCommand extends ChargePointCommand {
 
     public RemoteStopTransactionCommand(String parameters) {
         super();
+        parseParameters(parameters);
+    }
 
+    protected void parseParameters(String parameters) {
         // create Options object
         Options options = new Options();
         Option tag = new Option("tid", "transaction", true, "transaction id");

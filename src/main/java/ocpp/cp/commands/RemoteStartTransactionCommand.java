@@ -14,7 +14,10 @@ public class RemoteStartTransactionCommand extends ChargePointCommand {
 
     public RemoteStartTransactionCommand(String parameters) {
         super();
+        parseParameters(parameters);
+    }
 
+    protected void parseParameters(String parameters) {
         // create Options object
         Options options = new Options();
         Option tag = new Option("t", "tag", true, "tagid");
@@ -35,7 +38,6 @@ public class RemoteStartTransactionCommand extends ChargePointCommand {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
     }
 
     public Object execute() throws Exception {
