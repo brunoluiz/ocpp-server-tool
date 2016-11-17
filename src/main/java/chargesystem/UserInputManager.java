@@ -3,8 +3,7 @@ package chargesystem;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import ocpp.CommandsDispatcher;
-import ocpp.cp.commands.RemoteStartTransactionCommand;
-import ocpp.cp.commands.RemoteStopTransactionCommand;
+import ocpp.cp.commands.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +13,7 @@ import java.util.Scanner;
  * Created by bds on 09/11/2016.
  */
 public class UserInputManager implements Runnable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserInputManager.class);
+    private static final Logger log = LoggerFactory.getLogger(UserInputManager.class);
     private Thread thread = null;
 
     @Inject
@@ -28,7 +27,7 @@ public class UserInputManager implements Runnable {
 
     public void start() {
         if (thread == null) {
-            LOGGER.info("Starting UserInputManager...");
+            log.info("Starting UserInputManager...");
             thread = new Thread(this);
             thread.start();
         }
@@ -47,14 +46,22 @@ public class UserInputManager implements Runnable {
             String commandStr = input.nextLine().toLowerCase();
             if(commandStr.equals("")) continue;
 
-            if (commandStr.contains("remotestart")) {
-                dispatcher.queue(new RemoteStartTransactionCommand(commandStr));
-            }
-            else if(commandStr.contains("remotestop")) {
-                dispatcher.queue(new RemoteStopTransactionCommand(commandStr));
-            }
-            else {
-                LOGGER.warn("Invalid command or not implemented");
+            try {
+                if (commandStr.contains("remotestart")) {
+                    dispatcher.queue(new RemoteStartTransactionCommand(commandStr));
+                } else if (commandStr.contains("remotestop")) {
+                    dispatcher.queue(new RemoteStopTransactionCommand(commandStr));
+                } else if (commandStr.contains("changeavailability")) {
+                    dispatcher.queue(new ChangeAvailabilityCommand(commandStr));
+                } else if (commandStr.contains("getconfiguration")) {
+                    dispatcher.queue(new GetConfigurationCommand(commandStr));
+                } else if (commandStr.contains("changeconfiguration")) {
+                    dispatcher.queue(new ChangeConfigurationCommand(commandStr));
+                } else {
+                    log.warn("Invalid command or not implemented");
+                }
+            } catch (Exception e) {
+                log.warn("Command not executed");
             }
         }
     }

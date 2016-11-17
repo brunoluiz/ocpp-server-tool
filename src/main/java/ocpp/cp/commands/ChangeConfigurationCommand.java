@@ -9,12 +9,12 @@ public class ChangeConfigurationCommand extends ChargePointCommand {
     private String key = null;
     private String value = null;
 
-    public ChangeConfigurationCommand(String parameters) {
+    public ChangeConfigurationCommand(String parameters) throws Exception {
         super();
         parseParameters(parameters);
     }
 
-    protected void parseParameters(String parameters) {
+    protected void parseParameters(String parameters) throws Exception {
         // create Options object
         Options options = new Options();
         Option type = new Option("k", "key", true, "key");
@@ -27,13 +27,14 @@ public class ChangeConfigurationCommand extends ChargePointCommand {
 
         CommandLineParser parser = new DefaultParser();
         String[] parametersOptions = parameters.split(" ");
-        CommandLine cmd;
+
         try {
-            cmd = parser.parse(options, parametersOptions);
-            this.key   = cmd.getOptionValue("key");
+            CommandLine cmd = parser.parse(options, parametersOptions);
+            this.key = cmd.getOptionValue("key");
             this.value = cmd.getOptionValue("value");
         } catch (ParseException e) {
-            e.printStackTrace();
+            printHelp(options);
+            throw e;
         }
     }
 

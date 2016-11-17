@@ -11,12 +11,12 @@ import org.apache.commons.cli.*;
 public class RemoteStopTransactionCommand extends ChargePointCommand {
     private Integer transaction = null;
 
-    public RemoteStopTransactionCommand(String parameters) {
+    public RemoteStopTransactionCommand(String parameters) throws Exception {
         super();
         parseParameters(parameters);
     }
 
-    protected void parseParameters(String parameters) {
+    protected void parseParameters(String parameters) throws Exception {
         // create Options object
         Options options = new Options();
         Option tag = new Option("tid", "transaction", true, "transaction id");
@@ -25,12 +25,12 @@ public class RemoteStopTransactionCommand extends ChargePointCommand {
 
         CommandLineParser parser = new DefaultParser();
         String[] parametersOptions = parameters.split(" ");
-        CommandLine cmd;
         try {
-            cmd = parser.parse(options, parametersOptions);
+            CommandLine cmd = parser.parse(options, parametersOptions);
             this.transaction = Integer.parseInt(cmd.getOptionValue("transaction"));
         } catch (ParseException e) {
-            e.printStackTrace();
+            printHelp(options);
+            throw e;
         }
     }
 

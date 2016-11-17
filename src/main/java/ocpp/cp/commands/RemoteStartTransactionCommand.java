@@ -12,12 +12,12 @@ public class RemoteStartTransactionCommand extends ChargePointCommand {
     private String tag = null;
     private Integer connector = null;
 
-    public RemoteStartTransactionCommand(String parameters) {
+    public RemoteStartTransactionCommand(String parameters) throws Exception {
         super();
         parseParameters(parameters);
     }
 
-    protected void parseParameters(String parameters) {
+    protected void parseParameters(String parameters) throws Exception {
         // create Options object
         Options options = new Options();
         Option tag = new Option("t", "tag", true, "tagid");
@@ -30,13 +30,14 @@ public class RemoteStartTransactionCommand extends ChargePointCommand {
 
         CommandLineParser parser = new DefaultParser();
         String[] parametersOptions = parameters.split(" ");
-        CommandLine cmd;
+
         try {
-            cmd = parser.parse(options, parametersOptions);
+            CommandLine cmd = parser.parse(options, parametersOptions);
             this.tag = cmd.getOptionValue("tag");
             this.connector = Integer.parseInt(cmd.getOptionValue("connector"));
         } catch (ParseException e) {
-            e.printStackTrace();
+            printHelp(options);
+            throw e;
         }
     }
 

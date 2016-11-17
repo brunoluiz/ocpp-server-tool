@@ -1,6 +1,7 @@
 package ocpp;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.jws.WebService;
@@ -15,6 +16,7 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 import ocpp.cs._2012._06.*;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.DateUtil;
 
@@ -26,7 +28,7 @@ public class CentralSystemServer15 implements CentralSystemService {
 
 	protected String centralSystemServerEndpoint = "";
 	protected Endpoint endpoint;
-	private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(CentralSystemServer15.class);
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 	
 	private List<Integer> activeTransactions = new ArrayList<Integer>();
 		
@@ -38,13 +40,13 @@ public class CentralSystemServer15 implements CentralSystemService {
 	}
 	
 	private void start() {
-		LOGGER.info("Starting central system OCPP server @ {}", centralSystemServerEndpoint);
+		log.info("Starting central system OCPP server @ {}", centralSystemServerEndpoint);
 		endpoint = Endpoint.publish(centralSystemServerEndpoint, this);
 		
 		if (!endpoint.isPublished()) {
-			LOGGER.error("Could not publish central system OCPP server!");
+			log.error("Could not publish central system OCPP server!");
 		} else {
-			LOGGER.info("Central system OCPP server is published!");
+			log.info("Central system OCPP server is published!");
 		}
 	}
 	
@@ -53,7 +55,7 @@ public class CentralSystemServer15 implements CentralSystemService {
 	}
 
 	private void logReceivedRequest(Object request) {
-		LOGGER.info("Received "+request.getClass().getName());
+		log.info("Received "+request.getClass().getName());
 	}
 
 	public AuthorizeResponse authorize(AuthorizeRequest parameters, String chargeBoxId) {
@@ -118,8 +120,22 @@ public class CentralSystemServer15 implements CentralSystemService {
 
 	public MeterValuesResponse meterValues(MeterValuesRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
+		List<MeterValue> meterValues = parameters.getValues();
+		for (Iterator<MeterValue> it_meterValues = meterValues.iterator(); it_meterValues.hasNext(); ) {
+			MeterValue value = it_meterValues.next();
+			List<MeterValue.Value> measures = value.getValue();
+			for (Iterator<MeterValue.Value> it_measures = measures.iterator(); it_measures.hasNext(); ) {
+				MeterValue.Value measure = it_measures.next();
+				log.info("MeterValue{}: {} {}",
+						measure.getMeasurand(),
+						measure.getValue(),
+						measure.getUnit()
+				);
+			}
+		}
 
-		return null;
+		MeterValuesResponse response = new MeterValuesResponse();
+		return response;
 	}
 
 

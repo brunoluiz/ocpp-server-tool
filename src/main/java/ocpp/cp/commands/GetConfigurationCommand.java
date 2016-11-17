@@ -8,12 +8,12 @@ import org.apache.commons.cli.*;
 public class GetConfigurationCommand extends ChargePointCommand {
     private String key = null;
 
-    public GetConfigurationCommand(String parameters) {
+    public GetConfigurationCommand(String parameters) throws Exception {
         super();
         parseParameters(parameters);
     }
 
-    protected void parseParameters(String parameters) {
+    protected void parseParameters(String parameters) throws Exception {
         // create Options object
         Options options = new Options();
         Option type = new Option("k", "key", true, "key");
@@ -22,12 +22,13 @@ public class GetConfigurationCommand extends ChargePointCommand {
 
         CommandLineParser parser = new DefaultParser();
         String[] parametersOptions = parameters.split(" ");
-        CommandLine cmd;
+
         try {
-            cmd = parser.parse(options, parametersOptions);
+            CommandLine cmd = parser.parse(options, parametersOptions);
             this.key = cmd.getOptionValue("key");
         } catch (ParseException e) {
-            e.printStackTrace();
+            printHelp(options);
+            throw e;
         }
     }
 

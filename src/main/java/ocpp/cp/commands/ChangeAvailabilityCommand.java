@@ -13,12 +13,12 @@ public class ChangeAvailabilityCommand extends ChargePointCommand {
     private AvailabilityType type = null;
     private Integer connector = null;
 
-    public ChangeAvailabilityCommand(String parameters) {
+    public ChangeAvailabilityCommand(String parameters) throws Exception {
         super();
         parseParameters(parameters);
     }
 
-    protected void parseParameters(String parameters) {
+    protected void parseParameters(String parameters) throws Exception {
         // create Options object
         Options options = new Options();
         Option type = new Option("t", "type", true, "availability type");
@@ -31,19 +31,20 @@ public class ChangeAvailabilityCommand extends ChargePointCommand {
 
         CommandLineParser parser = new DefaultParser();
         String[] parametersOptions = parameters.split(" ");
-        CommandLine cmd;
+
         try {
-            cmd = parser.parse(options, parametersOptions);
+            CommandLine cmd = parser.parse(options, parametersOptions);
             String parsedType = cmd.getOptionValue("tag");
-            if (parsedType == "inoperative") {
+
+            if (parsedType == "inoperative")
                 this.type = AvailabilityType.INOPERATIVE;
-            } else {
+            else
                 this.type = AvailabilityType.OPERATIVE;
-            }
 
             this.connector = Integer.parseInt(cmd.getOptionValue("connector"));
         } catch (ParseException e) {
-            e.printStackTrace();
+            printHelp(options);
+            throw e;
         }
     }
 
