@@ -13,7 +13,8 @@ public class RemoteStartTransactionCommand extends ChargePointCommand {
     private Integer connector = null;
 
     public RemoteStartTransactionCommand(String parameters) throws Exception {
-        super(parameters);
+        super();
+        parseParameters(parameters);
     }
 
     protected void parseParameters(String parameters) throws Exception {

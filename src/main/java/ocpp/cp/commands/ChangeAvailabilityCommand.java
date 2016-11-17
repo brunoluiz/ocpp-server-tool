@@ -14,7 +14,8 @@ public class ChangeAvailabilityCommand extends ChargePointCommand {
     private Integer connector = null;
 
     public ChangeAvailabilityCommand(String parameters) throws Exception {
-        super(parameters);
+        super();
+        parseParameters(parameters);
     }
 
     protected void parseParameters(String parameters) throws Exception {

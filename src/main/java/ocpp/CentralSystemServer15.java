@@ -55,7 +55,7 @@ public class CentralSystemServer15 implements CentralSystemService {
 	}
 
 	private void logReceivedRequest(Object request) {
-		log.info("Received "+request.getClass().getName());
+        log.debug("Received "+request.getClass().getName());
 	}
 
 	public AuthorizeResponse authorize(AuthorizeRequest parameters, String chargeBoxId) {
@@ -126,7 +126,7 @@ public class CentralSystemServer15 implements CentralSystemService {
 			List<MeterValue.Value> measures = value.getValue();
 			for (Iterator<MeterValue.Value> it_measures = measures.iterator(); it_measures.hasNext(); ) {
 				MeterValue.Value measure = it_measures.next();
-				log.info("MeterValue{}: {} {}",
+				log.debug("MeterValue{}: {} {}",
 						measure.getMeasurand(),
 						measure.getValue(),
 						measure.getUnit()
@@ -150,7 +150,10 @@ public class CentralSystemServer15 implements CentralSystemService {
 		
 		StartTransactionResponse response = new StartTransactionResponse();
 		response.setIdTagInfo(tagInfo);
-		response.setTransactionId(transactionId); // FIXME: Should be generated
+		response.setTransactionId(transactionId);
+
+        log.info("{}: transaction id = {}", getClass().getSimpleName(), transactionId);
+
 		return response;		
 	}
 

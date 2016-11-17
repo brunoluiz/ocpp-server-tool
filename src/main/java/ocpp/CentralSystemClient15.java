@@ -89,7 +89,7 @@ public class CentralSystemClient15 implements ChargePointService {
 
 	public RemoteStartTransactionResponse remoteStartTransaction(RemoteStartTransactionRequest parameters, String chargeBoxId) {
 		logSendRequest(parameters);
-		RemoteStartTransactionResponse response = chargePointService.remoteStartTransaction(parameters, "");
+		RemoteStartTransactionResponse response = chargePointService.remoteStartTransaction(parameters, chargeBoxId);
 
 		return response;
 	}
@@ -97,7 +97,7 @@ public class CentralSystemClient15 implements ChargePointService {
 
 	public RemoteStopTransactionResponse remoteStopTransaction(RemoteStopTransactionRequest parameters, String chargeBoxId) {
 		logSendRequest(parameters);
-		RemoteStopTransactionResponse response = chargePointService.remoteStopTransaction(parameters, "");
+		RemoteStopTransactionResponse response = chargePointService.remoteStopTransaction(parameters, chargeBoxId);
 
 		return response;
 	}
@@ -111,7 +111,7 @@ public class CentralSystemClient15 implements ChargePointService {
 
 	public DataTransferResponse dataTransfer(DataTransferRequest parameters, String chargeBoxId) {
 		logSendRequest(parameters);
-		DataTransferResponse response = chargePointService.dataTransfer(parameters, "");
+		DataTransferResponse response = chargePointService.dataTransfer(parameters, chargeBoxId);
 
 		LOGGER.info("Data transfer:" + response.getStatus().toString() + " - " + response.getData());
 		return response;
