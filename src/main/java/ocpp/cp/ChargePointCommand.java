@@ -12,6 +12,10 @@ public abstract class ChargePointCommand implements OcppCommand {
     protected ChargePointService chargePointService = null;
     protected String chargeBoxId = "1";
 
+    protected ChargePointCommand(String parameters) throws Exception {
+        parseParameters(parameters);
+    }
+
     protected abstract void parseParameters(String parameters) throws Exception;
     public abstract Object execute() throws Exception;
 

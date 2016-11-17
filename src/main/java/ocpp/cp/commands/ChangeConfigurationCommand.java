@@ -10,8 +10,7 @@ public class ChangeConfigurationCommand extends ChargePointCommand {
     private String value = null;
 
     public ChangeConfigurationCommand(String parameters) throws Exception {
-        super();
-        parseParameters(parameters);
+        super(parameters);
     }
 
     protected void parseParameters(String parameters) throws Exception {

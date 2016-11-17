@@ -12,8 +12,7 @@ public class RemoteStopTransactionCommand extends ChargePointCommand {
     private Integer transaction = null;
 
     public RemoteStopTransactionCommand(String parameters) throws Exception {
-        super();
-        parseParameters(parameters);
+        super(parameters);
     }
 
     protected void parseParameters(String parameters) throws Exception {

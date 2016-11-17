@@ -9,8 +9,7 @@ public class GetConfigurationCommand extends ChargePointCommand {
     private String key = null;
 
     public GetConfigurationCommand(String parameters) throws Exception {
-        super();
-        parseParameters(parameters);
+        super(parameters);
     }
 
     protected void parseParameters(String parameters) throws Exception {
