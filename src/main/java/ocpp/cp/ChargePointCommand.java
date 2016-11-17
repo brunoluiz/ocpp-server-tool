@@ -8,6 +8,7 @@ import ocpp.cp._2012._06.ChargePointService;
  */
 public abstract class ChargePointCommand implements OcppCommand {
     protected ChargePointService chargePointService = null;
+    protected String chargeBoxId = "1";
 
     protected abstract void parseParameters(String parameters);
     public abstract Object execute() throws Exception;

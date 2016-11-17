@@ -45,7 +45,7 @@ public class RemoteStartTransactionCommand extends ChargePointCommand {
         parameters.setConnectorId(connector);
         parameters.setIdTag(tag);
 
-        RemoteStartTransactionResponse response = chargePointService.remoteStartTransaction(parameters, "");
+        RemoteStartTransactionResponse response = chargePointService.remoteStartTransaction(parameters, chargeBoxId);
         return response;
     }
 }

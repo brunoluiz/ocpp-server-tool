@@ -38,7 +38,7 @@ public class RemoteStopTransactionCommand extends ChargePointCommand {
         RemoteStopTransactionRequest parameters = new RemoteStopTransactionRequest();
         parameters.setTransactionId(transaction);
 
-        RemoteStopTransactionResponse response = chargePointService.remoteStopTransaction(parameters, "");
+        RemoteStopTransactionResponse response = chargePointService.remoteStopTransaction(parameters, chargeBoxId);
         return response;
     }
 }
