@@ -19,7 +19,7 @@ public class RemoteStartTransactionCommand implements OcppCommand {
     private final ChargePointService chargePointService;
     private String tag = null;
     private Integer connector = null;
-    private String chargeBoxId = "";
+    private String chargeBoxId = null;
 
     @Inject
     public RemoteStartTransactionCommand(@Assisted String parameters,
@@ -39,6 +39,10 @@ public class RemoteStartTransactionCommand implements OcppCommand {
         connector.setRequired(true);
         options.addOption(connector);
 
+        Option cpid = new Option("cpid", "charge point id", true, "charge point id");
+        cpid.setRequired(true);
+        options.addOption(cpid);
+
         CommandLineParser parser = new DefaultParser();
         String[] parametersOptions = parameters.split(" ");
 
@@ -46,6 +50,7 @@ public class RemoteStartTransactionCommand implements OcppCommand {
             CommandLine cmd = parser.parse(options, parametersOptions);
             this.tag = cmd.getOptionValue("tag");
             this.connector = Integer.parseInt(cmd.getOptionValue("connector"));
+            this.chargeBoxId = cmd.getOptionValue("cpid");
         } catch (ParseException e) {
             HelpFormatter formatter = new HelpFormatter();
             formatter.printHelp(getClass().getSimpleName(), options);

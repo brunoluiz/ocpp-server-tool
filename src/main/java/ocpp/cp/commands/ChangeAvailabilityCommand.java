@@ -20,7 +20,7 @@ public class ChangeAvailabilityCommand implements OcppCommand {
     private final ChargePointService chargePointService;
     private AvailabilityType type = null;
     private Integer connector = null;
-    private String chargeBoxId = "";
+    private String chargeBoxId = null;
 
     @Inject
     public ChangeAvailabilityCommand(@Assisted String parameters,
@@ -40,6 +40,10 @@ public class ChangeAvailabilityCommand implements OcppCommand {
         connector.setRequired(true);
         options.addOption(connector);
 
+        Option cpid = new Option("cpid", "charge point id", true, "charge point id");
+        cpid.setRequired(true);
+        options.addOption(cpid);
+
         CommandLineParser parser = new DefaultParser();
         String[] parametersOptions = parameters.split(" ");
 
@@ -53,6 +57,7 @@ public class ChangeAvailabilityCommand implements OcppCommand {
                 this.type = AvailabilityType.OPERATIVE;
 
             this.connector = Integer.parseInt(cmd.getOptionValue("connector"));
+            this.chargeBoxId = cmd.getOptionValue("cpid");
         } catch (ParseException e) {
             HelpFormatter formatter = new HelpFormatter();
             formatter.printHelp(getClass().getSimpleName(), options);

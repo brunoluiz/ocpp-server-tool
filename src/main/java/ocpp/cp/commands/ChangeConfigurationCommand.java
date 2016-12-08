@@ -16,7 +16,7 @@ public class ChangeConfigurationCommand implements OcppCommand {
     private final ChargePointService chargePointService;
     private String key = null;
     private String value = null;
-    private String chargeBoxId = "";
+    private String chargeBoxId = null;
 
     @Inject
     public ChangeConfigurationCommand(@Assisted String parameters,
@@ -36,6 +36,10 @@ public class ChangeConfigurationCommand implements OcppCommand {
         connector.setRequired(true);
         options.addOption(connector);
 
+        Option cpid = new Option("cpid", "charge point id", true, "charge point id");
+        cpid.setRequired(true);
+        options.addOption(cpid);
+
         CommandLineParser parser = new DefaultParser();
         String[] parametersOptions = parameters.split(" ");
 
@@ -43,6 +47,7 @@ public class ChangeConfigurationCommand implements OcppCommand {
             CommandLine cmd = parser.parse(options, parametersOptions);
             this.key = cmd.getOptionValue("key");
             this.value = cmd.getOptionValue("value");
+            this.chargeBoxId = cmd.getOptionValue("cpid");
         } catch (ParseException e) {
             HelpFormatter formatter = new HelpFormatter();
             formatter.printHelp(getClass().getSimpleName(), options);

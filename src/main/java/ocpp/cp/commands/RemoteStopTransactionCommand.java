@@ -18,7 +18,7 @@ public class RemoteStopTransactionCommand implements OcppCommand {
 
     private final ChargePointService chargePointService;
     private Integer transaction = null;
-    private String chargeBoxId = "";
+    private String chargeBoxId = null;
 
     @Inject
     public RemoteStopTransactionCommand(@Assisted String parameters,
@@ -34,11 +34,16 @@ public class RemoteStopTransactionCommand implements OcppCommand {
         tag.setRequired(true);
         options.addOption(tag);
 
+        Option cpid = new Option("cpid", "charge point id", true, "charge point id");
+        cpid.setRequired(true);
+        options.addOption(cpid);
+
         CommandLineParser parser = new DefaultParser();
         String[] parametersOptions = parameters.split(" ");
         try {
             CommandLine cmd = parser.parse(options, parametersOptions);
             this.transaction = Integer.parseInt(cmd.getOptionValue("transaction"));
+            this.chargeBoxId = cmd.getOptionValue("cpid");
         } catch (ParseException e) {
             HelpFormatter formatter = new HelpFormatter();
             formatter.printHelp(getClass().getSimpleName(), options);
