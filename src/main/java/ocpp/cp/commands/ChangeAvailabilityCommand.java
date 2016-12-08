@@ -1,20 +1,27 @@
 package ocpp.cp.commands;
 
-import ocpp.cp.ChargePointCommand;
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
+import ocpp.OcppCommand;
 import ocpp.cp._2012._06.AvailabilityType;
 import ocpp.cp._2012._06.ChangeAvailabilityRequest;
 import ocpp.cp._2012._06.ChangeAvailabilityResponse;
+import ocpp.cp._2012._06.ChargePointService;
 import org.apache.commons.cli.*;
 
 /**
  * Created by bds on 17/11/2016.
  */
-public class ChangeAvailabilityCommand extends ChargePointCommand {
+public class ChangeAvailabilityCommand implements OcppCommand {
     private AvailabilityType type = null;
     private Integer connector = null;
+    private ChargePointService chargePointService;
+    private String chargeBoxId = "";
 
-    public ChangeAvailabilityCommand(String parameters) throws Exception {
-        super();
+    @Inject
+    public ChangeAvailabilityCommand(@Assisted String parameters,
+                                     ChargePointService chargePointService) throws Exception {
+        this.chargePointService = chargePointService;
         parseParameters(parameters);
     }
 
@@ -43,7 +50,8 @@ public class ChangeAvailabilityCommand extends ChargePointCommand {
 
             this.connector = Integer.parseInt(cmd.getOptionValue("connector"));
         } catch (ParseException e) {
-            printHelp(options);
+            HelpFormatter formatter = new HelpFormatter();
+            formatter.printHelp(getClass().getSimpleName(), options);
             throw e;
         }
     }

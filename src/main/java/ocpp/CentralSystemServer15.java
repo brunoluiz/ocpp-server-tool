@@ -35,7 +35,7 @@ public class CentralSystemServer15 implements CentralSystemService {
 	@Inject
 	public CentralSystemServer15(@Named("CentralSystemServerEndpoint") String centralSystemServerEndpoint) {
 		this.centralSystemServerEndpoint = centralSystemServerEndpoint;
-		
+
 		start();
 	}
 	
@@ -126,7 +126,7 @@ public class CentralSystemServer15 implements CentralSystemService {
 			List<MeterValue.Value> measures = value.getValue();
 			for (Iterator<MeterValue.Value> it_measures = measures.iterator(); it_measures.hasNext(); ) {
 				MeterValue.Value measure = it_measures.next();
-				log.debug("MeterValue{}: {} {}",
+				log.trace("MeterValue {}: {} {}",
 						measure.getMeasurand(),
 						measure.getValue(),
 						measure.getUnit()

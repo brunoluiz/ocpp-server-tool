@@ -5,5 +5,4 @@ package ocpp;
  */
 public interface OcppCommand {
     Object execute() throws Exception;
-    void setClient(Object client);
 }

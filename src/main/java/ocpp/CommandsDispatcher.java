@@ -7,26 +7,22 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by bds on 09/11/2016.
  */
 public class CommandsDispatcher implements Runnable {
-    protected ArrayList<OcppCommand> queue = new ArrayList<OcppCommand>();
-    private Thread thread = null;
-    private Integer retries = 0;
     private static final Logger LOGGER = LoggerFactory.getLogger(CommandsDispatcher.class);
 
-    @Inject
-    @Named("ClientService")
-    Object client = null;
+    private List<OcppCommand> queue = new ArrayList<>();
+    private Thread thread = null;
+    private Integer retries = 0;
 
-    @Inject
-    @Named("OcppPoolingPeriod")
-    private final Integer POOLING_PERIOD = 500;
+    @Inject @Named("OcppPoolingPeriod")
+    private Integer POOLING_PERIOD = 500;
 
     public void queue(OcppCommand command) {
-        command.setClient(client);
         queue.add(command);
     }
 

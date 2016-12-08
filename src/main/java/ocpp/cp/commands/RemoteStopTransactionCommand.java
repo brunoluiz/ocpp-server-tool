@@ -1,6 +1,9 @@
 package ocpp.cp.commands;
 
-import ocpp.cp.ChargePointCommand;
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
+import ocpp.OcppCommand;
+import ocpp.cp._2012._06.ChargePointService;
 import ocpp.cp._2012._06.RemoteStopTransactionRequest;
 import ocpp.cp._2012._06.RemoteStopTransactionResponse;
 import org.apache.commons.cli.*;
@@ -8,11 +11,15 @@ import org.apache.commons.cli.*;
 /**
  * Created by bds on 09/11/2016.
  */
-public class RemoteStopTransactionCommand extends ChargePointCommand {
+public class RemoteStopTransactionCommand implements OcppCommand {
     private Integer transaction = null;
+    private ChargePointService chargePointService;
+    private String chargeBoxId = "";
 
-    public RemoteStopTransactionCommand(String parameters) throws Exception {
-        super();
+    @Inject
+    public RemoteStopTransactionCommand(@Assisted String parameters,
+                                        ChargePointService chargePointService) throws Exception {
+        this.chargePointService = chargePointService;
         parseParameters(parameters);
     }
 
@@ -29,7 +36,8 @@ public class RemoteStopTransactionCommand extends ChargePointCommand {
             CommandLine cmd = parser.parse(options, parametersOptions);
             this.transaction = Integer.parseInt(cmd.getOptionValue("transaction"));
         } catch (ParseException e) {
-            printHelp(options);
+            HelpFormatter formatter = new HelpFormatter();
+            formatter.printHelp(getClass().getSimpleName(), options);
             throw e;
         }
     }

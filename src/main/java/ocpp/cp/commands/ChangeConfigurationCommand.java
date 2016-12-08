@@ -1,16 +1,23 @@
 package ocpp.cp.commands;
 
-import ocpp.cp.ChargePointCommand;
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
+import ocpp.OcppCommand;
 import ocpp.cp._2012._06.ChangeConfigurationRequest;
 import ocpp.cp._2012._06.ChangeConfigurationResponse;
+import ocpp.cp._2012._06.ChargePointService;
 import org.apache.commons.cli.*;
 
-public class ChangeConfigurationCommand extends ChargePointCommand {
+public class ChangeConfigurationCommand implements OcppCommand {
     private String key = null;
     private String value = null;
+    private ChargePointService chargePointService;
+    private String chargeBoxId = "";
 
-    public ChangeConfigurationCommand(String parameters) throws Exception {
-        super();
+    @Inject
+    public ChangeConfigurationCommand(@Assisted String parameters,
+                                      ChargePointService chargePointService) throws Exception {
+        this.chargePointService = chargePointService;
         parseParameters(parameters);
     }
 
@@ -33,7 +40,8 @@ public class ChangeConfigurationCommand extends ChargePointCommand {
             this.key = cmd.getOptionValue("key");
             this.value = cmd.getOptionValue("value");
         } catch (ParseException e) {
-            printHelp(options);
+            HelpFormatter formatter = new HelpFormatter();
+            formatter.printHelp(getClass().getSimpleName(), options);
             throw e;
         }
     }
