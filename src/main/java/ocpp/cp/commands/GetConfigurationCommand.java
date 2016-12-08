@@ -6,11 +6,16 @@ import ocpp.OcppCommand;
 import ocpp.cp._2012._06.ChargePointService;
 import ocpp.cp._2012._06.GetConfigurationRequest;
 import ocpp.cp._2012._06.GetConfigurationResponse;
+import ocpp.cp._2012._06.KeyValue;
 import org.apache.commons.cli.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GetConfigurationCommand implements OcppCommand {
+    private final Logger log = LoggerFactory.getLogger(ChangeAvailabilityCommand.class);
+
+    private final ChargePointService chargePointService;
     private String key = null;
-    private ChargePointService chargePointService;
     private String chargeBoxId = "";
 
     @Inject
@@ -20,7 +25,7 @@ public class GetConfigurationCommand implements OcppCommand {
         parseParameters(parameters);
     }
 
-    protected void parseParameters(String parameters) throws Exception {
+    private void parseParameters(String parameters) throws Exception {
         // create Options object
         Options options = new Options();
         Option type = new Option("k", "key", true, "key");
@@ -44,6 +49,11 @@ public class GetConfigurationCommand implements OcppCommand {
         GetConfigurationRequest request = new GetConfigurationRequest();
 
         GetConfigurationResponse response = chargePointService.getConfiguration(request, chargeBoxId);
+
+        for (KeyValue value: response.getConfigurationKey()) {
+            log.info("Config[{}]: {}", value.getKey(), value.getValue());
+        }
+
         return response;
     }
 }

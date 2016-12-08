@@ -25,29 +25,23 @@ import utils.DateUtil;
 @SOAPBinding(style = Style.DOCUMENT, use = Use.LITERAL)
 @Addressing(enabled=true, required=true)
 public class CentralSystemServer15 implements CentralSystemService {
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
-	protected String centralSystemServerEndpoint = "";
-	protected Endpoint endpoint;
-	protected final Logger log = LoggerFactory.getLogger(getClass());
-	
-	private List<Integer> activeTransactions = new ArrayList<Integer>();
+	private final String centralSystemServerEndpoint;
+	private final Endpoint endpoint;
+	private List<Integer> activeTransactions = new ArrayList<>();
 		
 	@Inject
 	public CentralSystemServer15(@Named("CentralSystemServerEndpoint") String centralSystemServerEndpoint) {
-		this.centralSystemServerEndpoint = centralSystemServerEndpoint;
+        log.info("Starting central system OCPP server @ {}", centralSystemServerEndpoint);
 
-		start();
-	}
-	
-	private void start() {
-		log.info("Starting central system OCPP server @ {}", centralSystemServerEndpoint);
-		endpoint = Endpoint.publish(centralSystemServerEndpoint, this);
-		
-		if (!endpoint.isPublished()) {
-			log.error("Could not publish central system OCPP server!");
-		} else {
-			log.info("Central system OCPP server is published!");
-		}
+        this.centralSystemServerEndpoint = centralSystemServerEndpoint;
+        endpoint = Endpoint.publish(centralSystemServerEndpoint, this);
+        if (!endpoint.isPublished()) {
+            log.error("Could not publish central system OCPP server!");
+        } else {
+            log.info("Central system OCPP server is published!");
+        }
 	}
 	
 	private Integer generateTransactionId() {
@@ -55,15 +49,17 @@ public class CentralSystemServer15 implements CentralSystemService {
 	}
 
 	private void logReceivedRequest(Object request) {
-        log.debug("Received "+request.getClass().getName());
+        log.info("Received "+request.getClass().getName());
 	}
 
+	@Override
 	public AuthorizeResponse authorize(AuthorizeRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
 
+        // It will authorize any tag
 		IdTagInfo tagInfo = new IdTagInfo();
 		String userTag = parameters.getIdTag();
-		if(userTag.equals("blockedtag"))
+		if(userTag.equals(""))
 			tagInfo.setStatus(AuthorizationStatus.BLOCKED);
 		else 
 			tagInfo.setStatus(AuthorizationStatus.ACCEPTED);
@@ -74,7 +70,7 @@ public class CentralSystemServer15 implements CentralSystemService {
 		return response;
 	}
 
-
+    @Override
 	public BootNotificationResponse bootNotification(BootNotificationRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
 		
@@ -86,40 +82,42 @@ public class CentralSystemServer15 implements CentralSystemService {
 		return response;
 	}
 
-
+    @Override
 	public DataTransferResponse dataTransfer(DataTransferRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
-
+        // TODO: Implement something here
 		return null;
 	}
 
-
+    @Override
 	public DiagnosticsStatusNotificationResponse diagnosticsStatusNotification(
 			DiagnosticsStatusNotificationRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
-
-		return null;
+        // TODO: Implement something here
+		return new DiagnosticsStatusNotificationResponse();
 	}
 
-
+    @Override
 	public FirmwareStatusNotificationResponse firmwareStatusNotification(FirmwareStatusNotificationRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
-
-		return null;
+        // TODO: Implement something here
+        return new FirmwareStatusNotificationResponse();
 	}
 
-
+    @Override
 	public HeartbeatResponse heartbeat(HeartbeatRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
 
 		HeartbeatResponse response = new HeartbeatResponse();
 		response.setCurrentTime(DateUtil.getCurrentDate());
+
 		return response;
 	}
 
-
+    @Override
 	public MeterValuesResponse meterValues(MeterValuesRequest parameters, String chargeBoxId) {
-		logReceivedRequest(parameters);
+        log.trace("Received "+MeterValuesRequest.class.getName());
+
 		List<MeterValue> meterValues = parameters.getValues();
 		for (Iterator<MeterValue> it_meterValues = meterValues.iterator(); it_meterValues.hasNext(); ) {
 			MeterValue value = it_meterValues.next();
@@ -134,11 +132,10 @@ public class CentralSystemServer15 implements CentralSystemService {
 			}
 		}
 
-		MeterValuesResponse response = new MeterValuesResponse();
-		return response;
+		return new MeterValuesResponse();
 	}
 
-
+    @Override
 	public StartTransactionResponse startTransaction(StartTransactionRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
 
@@ -157,15 +154,13 @@ public class CentralSystemServer15 implements CentralSystemService {
 		return response;		
 	}
 
-
+    @Override
 	public StatusNotificationResponse statusNotification(StatusNotificationRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
-
-		StatusNotificationResponse response = new StatusNotificationResponse();
-		return response;
+		return new StatusNotificationResponse();
 	}
 
-
+    @Override
 	public StopTransactionResponse stopTransaction(StopTransactionRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
 

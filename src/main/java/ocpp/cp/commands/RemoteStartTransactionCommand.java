@@ -7,14 +7,18 @@ import ocpp.cp._2012._06.ChargePointService;
 import ocpp.cp._2012._06.RemoteStartTransactionRequest;
 import ocpp.cp._2012._06.RemoteStartTransactionResponse;
 import org.apache.commons.cli.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by bds on 09/11/2016.
  */
-public class RemoteStartTransactionCommand implements OcppCommand{
+public class RemoteStartTransactionCommand implements OcppCommand {
+    private final Logger log = LoggerFactory.getLogger(ChangeAvailabilityCommand.class);
+
+    private final ChargePointService chargePointService;
     private String tag = null;
     private Integer connector = null;
-    private ChargePointService chargePointService;
     private String chargeBoxId = "";
 
     @Inject
@@ -24,7 +28,7 @@ public class RemoteStartTransactionCommand implements OcppCommand{
         parseParameters(parameters);
     }
 
-    protected void parseParameters(String parameters) throws Exception {
+    private void parseParameters(String parameters) throws Exception {
         // create Options object
         Options options = new Options();
         Option tag = new Option("t", "tag", true, "tagid");
@@ -55,6 +59,8 @@ public class RemoteStartTransactionCommand implements OcppCommand{
         parameters.setIdTag(tag);
 
         RemoteStartTransactionResponse response = chargePointService.remoteStartTransaction(parameters, chargeBoxId);
+        log.info("Received status: {}", response.getStatus());
+
         return response;
     }
 }

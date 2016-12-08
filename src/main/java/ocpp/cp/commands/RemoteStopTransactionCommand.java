@@ -7,13 +7,17 @@ import ocpp.cp._2012._06.ChargePointService;
 import ocpp.cp._2012._06.RemoteStopTransactionRequest;
 import ocpp.cp._2012._06.RemoteStopTransactionResponse;
 import org.apache.commons.cli.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by bds on 09/11/2016.
  */
 public class RemoteStopTransactionCommand implements OcppCommand {
+    private final Logger log = LoggerFactory.getLogger(ChangeAvailabilityCommand.class);
+
+    private final ChargePointService chargePointService;
     private Integer transaction = null;
-    private ChargePointService chargePointService;
     private String chargeBoxId = "";
 
     @Inject
@@ -23,7 +27,7 @@ public class RemoteStopTransactionCommand implements OcppCommand {
         parseParameters(parameters);
     }
 
-    protected void parseParameters(String parameters) throws Exception {
+    private void parseParameters(String parameters) throws Exception {
         // create Options object
         Options options = new Options();
         Option tag = new Option("tid", "transaction", true, "transaction id");
@@ -47,6 +51,8 @@ public class RemoteStopTransactionCommand implements OcppCommand {
         parameters.setTransactionId(transaction);
 
         RemoteStopTransactionResponse response = chargePointService.remoteStopTransaction(parameters, chargeBoxId);
+        log.info("Received status: {}", response.getStatus());
+
         return response;
     }
 }

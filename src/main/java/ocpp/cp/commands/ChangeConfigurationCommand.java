@@ -7,11 +7,15 @@ import ocpp.cp._2012._06.ChangeConfigurationRequest;
 import ocpp.cp._2012._06.ChangeConfigurationResponse;
 import ocpp.cp._2012._06.ChargePointService;
 import org.apache.commons.cli.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ChangeConfigurationCommand implements OcppCommand {
+    private final Logger log = LoggerFactory.getLogger(ChangeConfigurationCommand.class);
+
+    private final ChargePointService chargePointService;
     private String key = null;
     private String value = null;
-    private ChargePointService chargePointService;
     private String chargeBoxId = "";
 
     @Inject
@@ -21,7 +25,7 @@ public class ChangeConfigurationCommand implements OcppCommand {
         parseParameters(parameters);
     }
 
-    protected void parseParameters(String parameters) throws Exception {
+    private void parseParameters(String parameters) throws Exception {
         // create Options object
         Options options = new Options();
         Option type = new Option("k", "key", true, "key");
@@ -52,6 +56,8 @@ public class ChangeConfigurationCommand implements OcppCommand {
         request.setValue(value);
 
         ChangeConfigurationResponse response = chargePointService.changeConfiguration(request, chargeBoxId);
+        log.info("Received status: {}", response.getStatus());
+
         return response;
     }
 }

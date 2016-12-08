@@ -8,14 +8,18 @@ import ocpp.cp._2012._06.ChangeAvailabilityRequest;
 import ocpp.cp._2012._06.ChangeAvailabilityResponse;
 import ocpp.cp._2012._06.ChargePointService;
 import org.apache.commons.cli.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by bds on 17/11/2016.
  */
 public class ChangeAvailabilityCommand implements OcppCommand {
+    private final Logger log = LoggerFactory.getLogger(ChangeAvailabilityCommand.class);
+
+    private final ChargePointService chargePointService;
     private AvailabilityType type = null;
     private Integer connector = null;
-    private ChargePointService chargePointService;
     private String chargeBoxId = "";
 
     @Inject
@@ -25,10 +29,10 @@ public class ChangeAvailabilityCommand implements OcppCommand {
         parseParameters(parameters);
     }
 
-    protected void parseParameters(String parameters) throws Exception {
+    private void parseParameters(String parameters) throws Exception {
         // create Options object
         Options options = new Options();
-        Option type = new Option("t", "type", true, "availability type");
+        Option type = new Option("t", "type", true, "availability type: Operative|Innoperative");
         type.setRequired(true);
         options.addOption(type);
 
@@ -62,6 +66,8 @@ public class ChangeAvailabilityCommand implements OcppCommand {
         request.setConnectorId(connector);
 
         ChangeAvailabilityResponse response = chargePointService.changeAvailability(request, chargeBoxId);
+        log.info("Received status: {}", response.getStatus());
+
         return response;
     }
 }
