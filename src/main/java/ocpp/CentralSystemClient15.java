@@ -14,17 +14,15 @@ public class CentralSystemClient15 implements ChargePointService {
 	private static String CHARGE_POINT_WSDL_LOCATION = "wsdl/ocpp_chargepointservice_1.5_final.wsdl"; // FIXME
 	private static final Logger log = LoggerFactory.getLogger(CentralSystemClient15.class);
 
-	private String centralSystemServerEndpoint = "";
-	private ChargePointService chargePointService = null;
+	private ChargePointService chargePointService;
 	
 	@Inject
 	public CentralSystemClient15(@Named("ChargePointServerEndpoint") String centralSystemServerEndpoint) {
 		log.info("Starting Central System OCPP client @ {}}", centralSystemServerEndpoint);
 
-        this.centralSystemServerEndpoint = centralSystemServerEndpoint;
         try {
             URL url = CentralSystemClient15.class.getClassLoader().getResource(CHARGE_POINT_WSDL_LOCATION);
-            chargePointService = new ChargePointService_Service(url).getChargePointServiceSoap12();
+            this.chargePointService = new ChargePointService_Service(url).getChargePointServiceSoap12();
 
             BindingProvider bp = (BindingProvider)chargePointService;
             bp.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, centralSystemServerEndpoint);

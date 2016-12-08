@@ -27,7 +27,6 @@ import utils.DateUtil;
 public class CentralSystemServer15 implements CentralSystemService {
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
-	private final String centralSystemServerEndpoint;
 	private final Endpoint endpoint;
 	private List<Integer> activeTransactions = new ArrayList<>();
 		
@@ -35,7 +34,6 @@ public class CentralSystemServer15 implements CentralSystemService {
 	public CentralSystemServer15(@Named("CentralSystemServerEndpoint") String centralSystemServerEndpoint) {
         log.info("Starting central system OCPP server @ {}", centralSystemServerEndpoint);
 
-        this.centralSystemServerEndpoint = centralSystemServerEndpoint;
         endpoint = Endpoint.publish(centralSystemServerEndpoint, this);
         if (!endpoint.isPublished()) {
             log.error("Could not publish central system OCPP server!");
@@ -85,22 +83,32 @@ public class CentralSystemServer15 implements CentralSystemService {
     @Override
 	public DataTransferResponse dataTransfer(DataTransferRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
-        // TODO: Implement something here
-		return null;
+
+        log.info("{}-{}: {}", parameters.getVendorId(), parameters.getMessageId(), parameters.getData());
+
+        DataTransferResponse response = new DataTransferResponse();
+        response.setData("");
+        response.setStatus(DataTransferStatus.ACCEPTED);
+
+		return response;
 	}
 
     @Override
 	public DiagnosticsStatusNotificationResponse diagnosticsStatusNotification(
 			DiagnosticsStatusNotificationRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
-        // TODO: Implement something here
+
+        log.info("Status: {}", parameters.getStatus());
+
 		return new DiagnosticsStatusNotificationResponse();
 	}
 
     @Override
 	public FirmwareStatusNotificationResponse firmwareStatusNotification(FirmwareStatusNotificationRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
-        // TODO: Implement something here
+
+        log.info("Status: {}", parameters.getStatus());
+
         return new FirmwareStatusNotificationResponse();
 	}
 
@@ -157,6 +165,12 @@ public class CentralSystemServer15 implements CentralSystemService {
     @Override
 	public StatusNotificationResponse statusNotification(StatusNotificationRequest parameters, String chargeBoxId) {
 		logReceivedRequest(parameters);
+
+        log.info("Connector: {}", parameters.getConnectorId());
+        log.info("- Status: {}", parameters.getStatus());
+        log.info("- Error code: {}", parameters.getErrorCode());
+        log.info("- Info: {}", parameters.getInfo());
+
 		return new StatusNotificationResponse();
 	}
 
