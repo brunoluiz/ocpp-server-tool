@@ -6,7 +6,7 @@
         </Console>
     </appenders>
     <Loggers>
-        <Logger name="chargesystem.App" level="trace" additivity="false">
+        <Logger name="app.App" level="trace" additivity="false">
             <AppenderRef ref="Console" />
         </Logger>
         <Logger name="ocpp.CentralSystemServer15" level="trace" additivity="false">

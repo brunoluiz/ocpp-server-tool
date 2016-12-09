@@ -1,5 +1,6 @@
-package chargesystem;
+package app;
 
+import chargesystem.UserInputManager;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 

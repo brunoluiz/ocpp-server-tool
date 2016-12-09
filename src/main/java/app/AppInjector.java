@@ -1,5 +1,6 @@
-package chargesystem;
+package app;
 
+import chargesystem.UserInputManager;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import ocpp.CommandsDispatcher;
 import com.google.inject.AbstractModule;

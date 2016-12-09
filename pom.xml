@@ -6,7 +6,7 @@
 
     <groupId>net.brunoluiz.ocpp</groupId>
     <artifactId>ocpp</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1-SNAPSHOT</version>
 
     <dependencies>
         <!-- GUICE Dependency Injector -->
@@ -129,7 +129,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>chargesystem.App</mainClass>
+                            <mainClass>app.App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
