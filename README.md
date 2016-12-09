@@ -25,7 +25,7 @@ Not all commands are supported, but the one below are. You just need to type the
 ```
 -cpid,--charge point id <arg>   charge point id
 -c,--connector <arg>            connector id
--t,--type <arg>                 availability type: Operative|Innoperative
+-t,--type <arg>                 availability type: operative|innoperative
 ```
 
 ### getconfiguration
@@ -41,16 +41,37 @@ Not all commands are supported, but the one below are. You just need to type the
 -v,--value <arg>                value
 ```
 
+### unlockconnector
+```
+-c,--connector <arg>            connector id
+-cpid,--charge point id <arg>   charge point id
+```
+
+### reset
+```
+-cpid,--charge point id <arg>   charge point id
+-t,--type <arg>                 reset type: hard|soft
+```
+
+### datatransfer
+```
+-cpid,--chargepoint <arg>   charge point id
+-d,--data <arg>             data
+-msgid,--messageid <arg>    message id
+-vid,--vendor <arg>         vendor id
+```
+
+### clearcache
+```
+-cpid,--chargepoint <arg>   charge point id
+```
+
 ## Todo:
 - Develop Tests
 - Implement the missing request commands:
-    - unlockConnector
-    - reset
     - getDiagnostics
-    - clearCache
     - updateFirmware
     - cancelReservation
-    - dataTransfer
     - getLocalListVersion
     - reserveNow
     - sendLocalList

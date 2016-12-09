@@ -62,6 +62,14 @@ public class UserInputManager implements Runnable {
                 dispatcher.queue(commandFactory.createGetConfiguration(input));
             } else if (input.contains("changeconfiguration")) {
                 dispatcher.queue(commandFactory.createChangeConfiguration(input));
+            } else if (input.contains("unlockconnector")) {
+                dispatcher.queue(commandFactory.createUnlockConnector(input));
+            } else if (input.contains("datatransfer")) {
+                dispatcher.queue(commandFactory.createDataTransfer(input));
+            } else if (input.contains("reset")) {
+                dispatcher.queue(commandFactory.createReset(input));
+            } else if (input.contains("clearcache")) {
+                dispatcher.queue(commandFactory.createClearCache(input));
             } else if (input.contains("exit") || input.contains("quit")) {
                 System.exit(0);
             } else {

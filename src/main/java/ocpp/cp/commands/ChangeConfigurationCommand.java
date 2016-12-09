@@ -36,7 +36,7 @@ public class ChangeConfigurationCommand implements OcppCommand {
         connector.setRequired(true);
         options.addOption(connector);
 
-        Option cpid = new Option("cpid", "charge point id", true, "charge point id");
+        Option cpid = new Option("cpid", "chargepoint", true, "charge point id");
         cpid.setRequired(true);
         options.addOption(cpid);
 
@@ -61,6 +61,11 @@ public class ChangeConfigurationCommand implements OcppCommand {
         request.setValue(value);
 
         ChangeConfigurationResponse response = chargePointService.changeConfiguration(request, chargeBoxId);
+
+        if (response == null) {
+            throw new Exception("Request unsuccessful... maybe the chargebox (id) is not connected");
+        }
+
         log.info("Received status: {}", response.getStatus());
 
         return response;

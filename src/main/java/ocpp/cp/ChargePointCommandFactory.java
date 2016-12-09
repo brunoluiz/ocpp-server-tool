@@ -11,4 +11,8 @@ public interface ChargePointCommandFactory {
     GetConfigurationCommand createGetConfiguration(String parameters);
     RemoteStartTransactionCommand createRemoteStartTransaction(String parameters);
     RemoteStopTransactionCommand createRemoteStopTransaction(String parameters);
+    UnlockConnectorCommand createUnlockConnector(String parameters);
+    ResetCommand createReset(String parameters);
+    DataTransferCommand createDataTransfer(String parameters);
+    ClearCacheCommand createClearCache(String parameters);
 }

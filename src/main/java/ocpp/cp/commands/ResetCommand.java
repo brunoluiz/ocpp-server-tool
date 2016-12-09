@@ -3,26 +3,25 @@ package ocpp.cp.commands;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import ocpp.OcppCommand;
-import ocpp.cp._2012._06.ChargePointService;
-import ocpp.cp._2012._06.RemoteStopTransactionRequest;
-import ocpp.cp._2012._06.RemoteStopTransactionResponse;
+import ocpp.cp._2012._06.*;
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import utils.StringUtil;
 
 /**
- * Created by bds on 09/11/2016.
+ * Created by bds on 09/12/2016.
  */
-public class RemoteStopTransactionCommand implements OcppCommand {
-    private final Logger log = LoggerFactory.getLogger(ChangeAvailabilityCommand.class);
+public class ResetCommand implements OcppCommand {
+    private final Logger log = LoggerFactory.getLogger(ResetCommand.class);
 
     private final ChargePointService chargePointService;
-    private Integer transaction = null;
     private String chargeBoxId = null;
+    private ResetType type;
 
     @Inject
-    public RemoteStopTransactionCommand(@Assisted String parameters,
-                                        ChargePointService chargePointService) throws Exception {
+    public ResetCommand(@Assisted String parameters,
+                        ChargePointService chargePointService) throws Exception {
         this.chargePointService = chargePointService;
         parseParameters(parameters);
     }
@@ -30,9 +29,9 @@ public class RemoteStopTransactionCommand implements OcppCommand {
     private void parseParameters(String parameters) throws Exception {
         // create Options object
         Options options = new Options();
-        Option tag = new Option("tid", "transaction", true, "transaction id");
-        tag.setRequired(true);
-        options.addOption(tag);
+        Option type = new Option("t", "type", true, "reset type: hard|soft");
+        type.setRequired(true);
+        options.addOption(type);
 
         Option cpid = new Option("cpid", "chargepoint", true, "charge point id");
         cpid.setRequired(true);
@@ -40,22 +39,31 @@ public class RemoteStopTransactionCommand implements OcppCommand {
 
         CommandLineParser parser = new DefaultParser();
         String[] parametersOptions = parameters.split(" ");
+
         try {
             CommandLine cmd = parser.parse(options, parametersOptions);
-            this.transaction = Integer.parseInt(cmd.getOptionValue("transaction"));
+            String typecap = StringUtil.capitalize(cmd.getOptionValue("type"));
+            this.type = ResetType.fromValue(typecap);
             this.chargeBoxId = cmd.getOptionValue("cpid");
         } catch (ParseException e) {
             HelpFormatter formatter = new HelpFormatter();
             formatter.printHelp(getClass().getSimpleName(), options);
             throw e;
+        } catch (IllegalArgumentException e) {
+            log.warn("'Type' argument is not valid!");
+            throw e;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
         }
     }
 
+    @Override
     public Object execute() throws Exception {
-        RemoteStopTransactionRequest parameters = new RemoteStopTransactionRequest();
-        parameters.setTransactionId(transaction);
+        ResetRequest request = new ResetRequest();
+        request.setType(type);
 
-        RemoteStopTransactionResponse response = chargePointService.remoteStopTransaction(parameters, chargeBoxId);
+        ResetResponse response = chargePointService.reset(request, chargeBoxId);
 
         if (response == null) {
             throw new Exception("Request unsuccessful... maybe the chargebox (id) is not connected");
@@ -63,6 +71,6 @@ public class RemoteStopTransactionCommand implements OcppCommand {
 
         log.info("Received status: {}", response.getStatus());
 
-        return response;
+        return null;
     }
 }

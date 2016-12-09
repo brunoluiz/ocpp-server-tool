@@ -32,7 +32,7 @@ public class GetConfigurationCommand implements OcppCommand {
         type.setRequired(false);
         options.addOption(type);
 
-        Option cpid = new Option("cpid", "charge point id", true, "charge point id");
+        Option cpid = new Option("cpid", "chargepoint", true, "charge point id");
         cpid.setRequired(true);
         options.addOption(cpid);
 
@@ -54,6 +54,10 @@ public class GetConfigurationCommand implements OcppCommand {
         GetConfigurationRequest request = new GetConfigurationRequest();
 
         GetConfigurationResponse response = chargePointService.getConfiguration(request, chargeBoxId);
+
+        if (response == null) {
+            throw new Exception("Request unsuccessful... maybe the chargebox (id) is not connected");
+        }
 
         for (KeyValue value: response.getConfigurationKey()) {
             log.info("Config[{}]: {}", value.getKey(), value.getValue());

@@ -4,25 +4,26 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import ocpp.OcppCommand;
 import ocpp.cp._2012._06.ChargePointService;
-import ocpp.cp._2012._06.RemoteStopTransactionRequest;
-import ocpp.cp._2012._06.RemoteStopTransactionResponse;
+import ocpp.cp._2012._06.UnlockConnectorRequest;
+import ocpp.cp._2012._06.UnlockConnectorResponse;
+import ocpp.cp._2012._06.UnlockStatus;
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created by bds on 09/11/2016.
+ * Created by bds on 09/12/2016.
  */
-public class RemoteStopTransactionCommand implements OcppCommand {
-    private final Logger log = LoggerFactory.getLogger(ChangeAvailabilityCommand.class);
+public class UnlockConnectorCommand implements OcppCommand {
+    private final Logger log = LoggerFactory.getLogger(UnlockConnectorCommand.class);
 
     private final ChargePointService chargePointService;
-    private Integer transaction = null;
+    private Integer connector = null;
     private String chargeBoxId = null;
 
     @Inject
-    public RemoteStopTransactionCommand(@Assisted String parameters,
-                                        ChargePointService chargePointService) throws Exception {
+    public UnlockConnectorCommand(@Assisted String parameters,
+                                  ChargePointService chargePointService) throws Exception {
         this.chargePointService = chargePointService;
         parseParameters(parameters);
     }
@@ -30,9 +31,9 @@ public class RemoteStopTransactionCommand implements OcppCommand {
     private void parseParameters(String parameters) throws Exception {
         // create Options object
         Options options = new Options();
-        Option tag = new Option("tid", "transaction", true, "transaction id");
-        tag.setRequired(true);
-        options.addOption(tag);
+        Option connector = new Option("c", "connector", true, "connector id");
+        connector.setRequired(true);
+        options.addOption(connector);
 
         Option cpid = new Option("cpid", "chargepoint", true, "charge point id");
         cpid.setRequired(true);
@@ -40,9 +41,10 @@ public class RemoteStopTransactionCommand implements OcppCommand {
 
         CommandLineParser parser = new DefaultParser();
         String[] parametersOptions = parameters.split(" ");
+
         try {
             CommandLine cmd = parser.parse(options, parametersOptions);
-            this.transaction = Integer.parseInt(cmd.getOptionValue("transaction"));
+            this.connector = Integer.parseInt(cmd.getOptionValue("connector"));
             this.chargeBoxId = cmd.getOptionValue("cpid");
         } catch (ParseException e) {
             HelpFormatter formatter = new HelpFormatter();
@@ -51,11 +53,12 @@ public class RemoteStopTransactionCommand implements OcppCommand {
         }
     }
 
+    @Override
     public Object execute() throws Exception {
-        RemoteStopTransactionRequest parameters = new RemoteStopTransactionRequest();
-        parameters.setTransactionId(transaction);
+        UnlockConnectorRequest request = new UnlockConnectorRequest();
+        request.setConnectorId(connector);
 
-        RemoteStopTransactionResponse response = chargePointService.remoteStopTransaction(parameters, chargeBoxId);
+        UnlockConnectorResponse response = chargePointService.unlockConnector(request, chargeBoxId);
 
         if (response == null) {
             throw new Exception("Request unsuccessful... maybe the chargebox (id) is not connected");
