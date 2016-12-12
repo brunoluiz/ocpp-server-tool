@@ -171,6 +171,11 @@ public class CentralSystemServer15 implements CentralSystemService {
         log.info("- Error code: {}", parameters.getErrorCode());
         log.info("- Info: {}", parameters.getInfo());
 
+        if(parameters.getErrorCode().equals(ChargePointErrorCode.OTHER_ERROR)) {
+            log.info("- Vendor Id: {}", parameters.getVendorId());
+            log.info("- Vendor Error Code: {}", parameters.getVendorErrorCode());
+        }
+
 		return new StatusNotificationResponse();
 	}
 

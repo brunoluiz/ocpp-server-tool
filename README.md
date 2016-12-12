@@ -6,7 +6,7 @@ To use it, you need to run ```maven package``` and then you will be able to run 
 
 ## Supported Commands
 
-Not all commands are supported, but the one below are. You just need to type the command at the console + its arguments, as a "bash command". As you will see, all commands require the charge station id.
+Not all commands are supported, but the ones below are. You just need to type the command at the console + its arguments, as a "bash command". As you will see, all commands require the charge station id.
 
 ### remotestart
 ```
@@ -78,6 +78,7 @@ Not all commands are supported, but the one below are. You just need to type the
 - Define a proper code style
 - Allow users to choose which OCPP version they want to use
 - Create a OCPP Charge Station simulator (who knows)
+- Create an external settings file
 
 ## Contributing
 Feel free to implement new features and push to this repo. I will review it as soon as possible.
