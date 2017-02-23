@@ -28,6 +28,10 @@ public class AppInjector extends AbstractModule {
                 .to(props.getProperty("chargepoint.endpoint", "http://192.168.1.2:9000/ocpp/ChargePoint"));
 
         bindConstant()
+                .annotatedWith(Names.named("chargepoint.id"))
+                .to(props.getProperty("chargepoint.id", "1"));
+
+        bindConstant()
                 .annotatedWith(Names.named("centralsystem.endpoint"))
                 .to(props.getProperty("centralsystem.endpoint", "http://0.0.0.0:9000/ocpp/CentralSystem"));
 

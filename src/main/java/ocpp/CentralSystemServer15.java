@@ -73,7 +73,7 @@ public class CentralSystemServer15 implements CentralSystemService {
 		BootNotificationResponse response = new BootNotificationResponse();
 		response.setStatus(RegistrationStatus.ACCEPTED);
 		response.setCurrentTime(DateUtil.getCurrentDate());
-		response.setHeartbeatInterval(500);
+		response.setHeartbeatInterval(30);
 
 		return response;
 	}
@@ -130,7 +130,7 @@ public class CentralSystemServer15 implements CentralSystemService {
 			List<MeterValue.Value> measures = value.getValue();
 			for (Iterator<MeterValue.Value> it_measures = measures.iterator(); it_measures.hasNext(); ) {
 				MeterValue.Value measure = it_measures.next();
-				log.trace("MeterValue {}: {} {}",
+				log.trace("MeterValue {}: {} {}\n",
 						measure.getMeasurand(),
 						measure.getValue(),
 						measure.getUnit()
