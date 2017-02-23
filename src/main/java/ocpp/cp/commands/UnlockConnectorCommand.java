@@ -18,8 +18,8 @@ public class UnlockConnectorCommand implements OcppCommand {
     private final Logger log = LoggerFactory.getLogger(UnlockConnectorCommand.class);
 
     private final ChargePointService chargePointService;
-    private Integer connector = null;
-    private String chargeBoxId = null;
+    private Integer connector;
+    private String chargeBoxId;
 
     @Inject
     public UnlockConnectorCommand(@Assisted String parameters,

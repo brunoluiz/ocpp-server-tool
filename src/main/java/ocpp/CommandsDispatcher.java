@@ -17,10 +17,16 @@ public class CommandsDispatcher implements Runnable {
 
     private List<OcppCommand> queue = new ArrayList<>();
     private Thread thread = null;
-    private Integer retries = 0;
 
-    @Inject @Named("OcppPoolingPeriod")
-    private Integer POOLING_PERIOD = 500;
+    private final int retries;
+    private final int period;
+
+    @Inject
+    public CommandsDispatcher(@Named("ocpp.period") int period,
+                              @Named("ocpp.retries") int retries) {
+        this.period = period;
+        this.retries = retries;
+    }
 
     public void queue(OcppCommand command) {
         queue.add(command);
@@ -38,15 +44,11 @@ public class CommandsDispatcher implements Runnable {
         while(true) {
             process();
             try {
-                Thread.sleep(POOLING_PERIOD);
+                Thread.sleep(period);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-    }
-
-    public void setRetries(int retries) {
-        this.retries = retries;
     }
 
     private void process() {

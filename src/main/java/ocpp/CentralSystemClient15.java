@@ -17,7 +17,7 @@ public class CentralSystemClient15 implements ChargePointService {
 	private ChargePointService chargePointService;
 	
 	@Inject
-	public CentralSystemClient15(@Named("ChargePointServerEndpoint") String centralSystemServerEndpoint) {
+	public CentralSystemClient15(@Named("chargepoint.endpoint") String centralSystemServerEndpoint) {
 		log.info("Starting Central System OCPP client @ {}}", centralSystemServerEndpoint);
 
         try {

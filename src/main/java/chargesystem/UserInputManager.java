@@ -32,7 +32,6 @@ public class UserInputManager implements Runnable {
             thread.start();
         }
 
-        dispatcher.setRetries(0);
         dispatcher.start();
     }
 

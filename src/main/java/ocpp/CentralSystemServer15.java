@@ -26,15 +26,13 @@ import utils.DateUtil;
 @Addressing(enabled=true, required=true)
 public class CentralSystemServer15 implements CentralSystemService {
 	private final Logger log = LoggerFactory.getLogger(getClass());
-
-	private final Endpoint endpoint;
 	private List<Integer> activeTransactions = new ArrayList<>();
 		
 	@Inject
-	public CentralSystemServer15(@Named("CentralSystemServerEndpoint") String centralSystemServerEndpoint) {
+	public CentralSystemServer15(@Named("centralsystem.endpoint") String centralSystemServerEndpoint) {
         log.info("Starting central system OCPP server @ {}", centralSystemServerEndpoint);
 
-        endpoint = Endpoint.publish(centralSystemServerEndpoint, this);
+		Endpoint endpoint = Endpoint.publish(centralSystemServerEndpoint, this);
         if (!endpoint.isPublished()) {
             log.error("Could not publish central system OCPP server!");
         } else {
