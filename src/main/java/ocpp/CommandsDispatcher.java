@@ -38,7 +38,7 @@ public class CommandsDispatcher implements Runnable {
     }
 
     public void run() {
-        while(thread != null) {
+        while (thread != null) {
             process();
             try {
                 Thread.sleep(period);
@@ -52,7 +52,7 @@ public class CommandsDispatcher implements Runnable {
         for (Iterator<OcppCommand> it = queue.iterator(); it.hasNext(); ) {
             OcppCommand command = it.next();
 
-            for(int totalRetries = 0; totalRetries < (this.retries+1); totalRetries++) {
+            for (int totalRetries = 0; totalRetries < (this.retries + 1); totalRetries++) {
                 try {
                     command.execute();
                     break;

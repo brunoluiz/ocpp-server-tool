@@ -52,7 +52,7 @@ public class GetConfigurationCommand implements OcppCommand {
 
     public Object execute() throws Exception {
         GetConfigurationRequest request = new GetConfigurationRequest();
-        if(key != null) request.getKey().add(key);
+        if (key != null) request.getKey().add(key);
 
         GetConfigurationResponse response = chargePointService.getConfiguration(request, chargeBoxId);
 
@@ -60,7 +60,7 @@ public class GetConfigurationCommand implements OcppCommand {
             throw new Exception("Request unsuccessful... maybe the chargebox (id) is not connected");
         }
 
-        for (KeyValue value: response.getConfigurationKey()) {
+        for (KeyValue value : response.getConfigurationKey()) {
             log.info("Config[{}]: {}", value.getKey(), value.getValue());
         }
 

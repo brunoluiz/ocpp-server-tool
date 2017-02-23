@@ -61,11 +61,11 @@ public class AppInjector extends AbstractModule {
         try {
             File jarPath = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
             String propertiesPath = jarPath.getParentFile().getAbsolutePath();
-            props.load(new FileInputStream(propertiesPath+"/settings.properties"));
+            props.load(new FileInputStream(propertiesPath + "/settings.properties"));
         } catch (Exception e) {
             log.error("No settings.properties found on the root folder! Exiting...");
             System.exit(1);
-            return ;
+            return;
         }
 
         configureConstantsBindings();

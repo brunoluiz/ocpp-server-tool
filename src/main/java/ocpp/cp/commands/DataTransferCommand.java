@@ -76,7 +76,7 @@ public class DataTransferCommand implements OcppCommand {
         }
 
         log.info("Received status: {}", response.getStatus());
-        if(response.getStatus().equals(DataTransferStatus.ACCEPTED)) {
+        if (response.getStatus().equals(DataTransferStatus.ACCEPTED)) {
             log.info(" - Data: {}", response.getData());
         }
 

@@ -34,14 +34,14 @@ public class UserInputManager implements Runnable {
     }
 
     public void run() {
-        while(thread != null) {
+        while (thread != null) {
             //create the Scanner
             System.out.printf("ocpp@cs:cp# ");
             Scanner input = new Scanner(System.in);
 
             //read input
             String commandStr = input.nextLine().toLowerCase();
-            if(commandStr.equals("")) continue;
+            if (commandStr.equals("")) continue;
 
             execute(commandStr);
         }

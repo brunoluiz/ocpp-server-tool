@@ -19,7 +19,7 @@ public class ClearCacheCommand implements OcppCommand {
 
     @Inject
     public ClearCacheCommand(@Assisted String parameters,
-                                      ChargePointService chargePointService) throws Exception {
+                             ChargePointService chargePointService) throws Exception {
         this.chargePointService = chargePointService;
         parseParameters(parameters);
     }
