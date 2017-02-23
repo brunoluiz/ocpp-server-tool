@@ -31,12 +31,10 @@ public class UserInputManager implements Runnable {
             thread = new Thread(this);
             thread.start();
         }
-
-        dispatcher.start();
     }
 
     public void run() {
-        while(true) {
+        while(thread != null) {
             //create the Scanner
             System.out.printf("ocpp@cs:cp# ");
             Scanner input = new Scanner(System.in);

@@ -9,11 +9,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by bds on 09/11/2016.
- */
 public class CommandsDispatcher implements Runnable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(CommandsDispatcher.class);
+    private static final Logger log = LoggerFactory.getLogger(CommandsDispatcher.class);
 
     private List<OcppCommand> queue = new ArrayList<>();
     private Thread thread = null;
@@ -34,14 +31,14 @@ public class CommandsDispatcher implements Runnable {
 
     public void start() {
         if (thread == null) {
-            LOGGER.info("Starting CommandsDispatcher...");
+            log.info("Starting CommandsDispatcher...");
             thread = new Thread(this);
             thread.start();
         }
     }
 
     public void run() {
-        while(true) {
+        while(thread != null) {
             process();
             try {
                 Thread.sleep(period);
