@@ -52,6 +52,7 @@ public class GetConfigurationCommand implements OcppCommand {
 
     public Object execute() throws Exception {
         GetConfigurationRequest request = new GetConfigurationRequest();
+        if(key != null) request.getKey().add(key);
 
         GetConfigurationResponse response = chargePointService.getConfiguration(request, chargeBoxId);
 
