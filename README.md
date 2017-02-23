@@ -1,8 +1,8 @@
 # OCPP Central System Tool
 
-This tool was used to simulate a OCPP 1.5 Central System server/client. IT DOES NOT SIMULATE A CHARGING STATION, so you need to use a real one (or use a software to simulate it as well).
+This tool was used to simulate a OCPP 1.5 Central System server. IT DOES NOT SIMULATE A CHARGING STATION, so you need to use a real one (or use a software to simulate it as well).
 
-To use it, you need to run ```maven package``` and then you will be able to run it using the "runnable" jar. If you are not using an IDE, you can run it using ```java -jar PATHTOJAR.jar```.
+To use it, you need to run ```mvn package``` and then you will be able to run it using the "runnable" jar (```java -jar PATHTOJAR.jar```). You need to create a settings.properties at the same folder where the JAR is, with the desired Charge Point endpoint URL. A settings.properties model is available at the src/main/resources folder.
 
 ## Supported Commands
 
@@ -15,7 +15,7 @@ Not all commands are supported, but the ones below are. You just need to type th
 -t,--tag <arg>                  tagid
 ```
 
-### remotestart
+### remotestop
 ```
 -cpid,--charge point id <arg>   charge point id
 -tid,--transaction <arg>        transaction id`
