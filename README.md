@@ -68,14 +68,32 @@ Not all commands are supported, but the ones below are. You just need to type th
 -cpid,--chargepoint <arg>   charge point id
 ```
 
+### getlocallist
+```
+-cpid,--chargepoint <arg>   charge point id
+```
+
+### cancelreservation
+```
+-cpid,--chargepoint <arg>   charge point id
+-rid,--reservation <arg>    reservation id
+```
+
+### reservenow (right now is not working properly)
+```
+-c,--connector <arg>        connector id
+-cpid,--chargepoint <arg>   charge point id
+-e,--expiredate <arg>       expire date (in unix timestamp)
+-pt,--parenttag <arg>       parent tag
+-rid,--reservation <arg>    reservation id
+-t,--tag <arg>              tagid
+```
+
 ## Todo:
 - Develop Tests
 - Implement the missing request commands:
     - getDiagnostics
     - updateFirmware
-    - cancelReservation
-    - getLocalListVersion
-    - reserveNow
     - sendLocalList
 - Define a proper code style
 - Allow users to choose which OCPP version they want to use
